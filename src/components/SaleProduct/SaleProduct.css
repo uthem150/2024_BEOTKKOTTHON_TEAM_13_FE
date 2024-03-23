@@ -1,0 +1,140 @@
+.sale-product {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px;
+  position: relative;
+}
+
+.product-details {
+  display: flex;
+}
+
+.product-image {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
+
+.product-details h2 {
+  margin: 0;
+}
+
+.products {
+  margin-top: 16px;
+}
+
+.product-item {
+  margin-top: 8px;
+  display: inline-block;
+  padding: 6px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: var(--grey-95, #f2f2f2);
+  color: var(--grey-40, #666);
+  font-family: ABeeZee;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.14px;
+  margin-right: 8px;
+}
+
+.sale-product-title {
+  color: var(--black-10, #191919);
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.15px;
+  width: 170px;
+}
+
+.sale-product-price {
+  color: var(--black-10, #191919);
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.2px;
+  margin-top: 8px;
+}
+
+.sale-product-satisfaction-container {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sale-product-satisfaction-bar {
+  margin-top: 5px;
+  width: 96px;
+  /* 바의 너비 설정 */
+  height: 8px;
+  /* 바의 높이 설정 */
+  background-color: #d9d9d9;
+  /* 바의 배경색 설정 */
+  border-radius: 5px;
+  /* 바의 모서리를 둥글게 만듭니다. */
+  overflow: hidden;
+  /* 만족도를 나타내는 바의 내용이 바깥으로 넘치지 않도록 합니다. */
+}
+
+.sale-product-satisfaction-fill {
+  height: 100%;
+  background-color: #f0d135;
+}
+
+.sale-product-satisfaction {
+  text-align: right;
+  color: #262626;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.14px;
+  margin-right: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  position: absolute;
+  right: 0;
+}
+
+.sale-product-user-name {
+  color: var(--black-20, #333);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.14px;
+}
+
+.sale-product-satisfaction-num {
+  color: var(--black-20, #333);
+  text-align: center;
+  font-family: ABeeZee;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.12px;
+}
+
+.sale-product-pick-button {
+  padding: 0px;
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  right: 0;
+  margin-top: 2px;
+  margin-right: 16px;
+}

@@ -1,0 +1,76 @@
+.map-modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Close button CSS */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+
+#kakao-map {
+  opacity: 0.8;
+  width: 100%;
+  /* 지도가 화면에 꽉 차도록 설정 */
+  height: 100vh;
+}
+
+
+
+h1 {
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.bottom-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background-color: #ffffff;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  z-index: 999;
+  /* 필요에 따라 z-index 설정 */
+  border-radius: 24px 24px 24px 24px;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.set-location-image {
+  width: 34px;
+  height: 36px;
+  
+}
+
+.set-location-button {
+  position: absolute;
+  bottom: 46%;
+  /* 원하는 위치로 조정 */
+  left: 89%;
+  /* 가운데 정렬 */
+  border-radius: 50%;
+  padding-top: 5px;
+  border: none;
+  transform: translateX(-50%);
+  /* 가운데 정렬을 위한 transform */
+  z-index: 1000;
+  /* 다른 요소 위에 표시하기 위한 z-index 설정 */
+  background: var(--grey-95, #F2F2F2);
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.16);
+}
+
+.map-products{
+  margin-bottom: 50px;
+}

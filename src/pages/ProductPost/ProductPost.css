@@ -1,0 +1,231 @@
+div {
+    white-space: pre-wrap;
+}
+
+.product-post-container {
+    background-color: #f5f5f5;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-direction: column;
+    align-items: center;
+    /* 수직 정렬 */
+    justify-content: center;
+    /* 수평 정렬 */
+
+
+}
+
+
+.product-post-header {
+    display: flex;
+    width: 100%;
+    padding: 12px 16px;
+
+}
+
+.product-post-text {
+    flex: 1 0 0;
+    color: #191919;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.16px;
+    margin-left: -50px;
+}
+
+
+.product-post-image {
+    margin-left: 16px;
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    border: 1px solid #D9D9D9;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+}
+
+.product-post-image img {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    border-radius: 8px;
+
+}
+
+
+.image-upload-label img {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: 8px;
+}
+
+.product-post-content {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 16px;
+    width: 90%;
+    height: 128px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    border: 1px solid #D9D9D9;
+    background-color: transparent;
+
+}
+
+.product-post-place {
+    margin-top: 24px;
+    margin-left: 16px;
+    margin-right: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-post-place-text {
+    color: #333;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.14px;
+}
+
+.product-post-button-container {
+    margin-top: 42px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-post-button {
+    display: flex;
+    width: 90%;
+    padding: 12px 16px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    border: none;
+    background: var(--brand_color, #FFDC25);
+    color: #191919;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.16px;
+}
+
+
+
+.product-post-select {
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+    height: 45px;
+    padding: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 16px;
+    background: var(--grey-95, #F2F2F2);
+
+
+}
+
+.option-buttons {
+    display: flex;
+    flex-grow: 1;
+    /* 옵션 버튼들이 컨테이너에 공간을 채우도록 함 */
+
+
+
+}
+
+.option-buttons button {
+    display: flex;
+    height: 39px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex: 1 0 0;
+    flex-grow: 1;
+    border: none;
+    border-radius: 12px;
+    background: var(--grey-95, #F2F2F2);
+    color: var(--grey-75, #BCBCBC);
+    text-align: center;
+
+    /* h16 */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.16px;
+
+}
+
+/* 선택된 버튼에 대한 스타일 */
+.option-buttons button.active {
+
+    background: var(--brand_color, #FFDC25);
+    color: var(--black-10, #191919);
+    text-align: center;
+
+    /* h16 */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.16px;
+    /* 선택된 버튼을 구별하기 위해 배경색 변경 */
+}
+
+.product-post-select-text {
+    margin-top: 24px;
+    margin-left: 16px;
+    margin-bottom: 8px;
+    color: #333;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.14px;
+
+}
+
+.next-button {
+    border: none;
+    background-color: transparent;
+    margin-top: 15px;
+
+}
+
+.product-post-select-place-container {
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.product-post-select-place {
+
+    display: flex;
+    width: 95%;
+    padding: 8px;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid #D9D9D9;
+
+}

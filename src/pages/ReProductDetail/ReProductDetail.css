@@ -1,0 +1,286 @@
+div {
+    white-space: pre-wrap;
+}
+
+.product-detail-container {
+    background-color: #f5f5f5;
+    /* 회색 바탕화면 색상 */
+    height: 100vh;
+    padding: 20px;
+    max-height: calc(100vh - 60px);
+    /* 페이지 전체 높이에서 '구매하기' 버튼의 높이를 뺀 값으로 최대 높이 설정 */
+    overflow-y: auto;
+    /* 스크롤이 필요한 경우 스크롤 활성화 */
+
+}
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 수직 정렬 */
+    justify-content: center;
+    /* 수평 정렬 */
+    margin-top: 30px;
+}
+
+.product-images {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+
+}
+
+.product-header {
+    max-width: 100%;
+    height: 10px;
+    margin: 0px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.product-name {
+    margin-left: 10px;
+    color: #191919;
+    font-family: Abel;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+
+
+.back-button {
+    margin-top: 4px;
+    border: none;
+    background-color: transparent;
+}
+
+.product-price {
+    color: #191919;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.384px;
+}
+
+.price-pick {
+    margin-top: 16px;
+    display: flex;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.product-seller {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+}
+
+.product-satisfaction-bar {
+    margin-top: 5px;
+    width: 128px;
+    /* 바의 너비 설정 */
+    height: 8px;
+    /* 바의 높이 설정 */
+    background-color: #D9D9D9;
+    /* 바의 배경색 설정 */
+    border-radius: 5px;
+    /* 바의 모서리를 둥글게 만듭니다. */
+    overflow: hidden;
+    /* 만족도를 나타내는 바의 내용이 바깥으로 넘치지 않도록 합니다. */
+}
+
+.satisfaction-fill {
+    height: 100%;
+    /* 바의 높이를 100%로 설정하여 전체 바를 채우도록 합니다. */
+    background-color: #F0D135;
+    /* 만족도가 50% 이상일 때의 채워진 바의 배경색을 설정합니다. */
+}
+
+.product-satisfaction {
+    text-align: right;
+    color: #262626;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.14px;
+}
+
+.seller-name {
+    color: #333;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.16px;
+
+}
+
+.satisfaction-num {
+    margin-left: 5px;
+    color: #262626;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.18px;
+}
+
+.product-address {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+
+}
+
+.address-name {
+    color: #666;
+    text-align: center;
+    font-family: ABeeZee;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.14px;
+}
+
+.product-distance {
+    color: #666;
+    text-align: center;
+    font-family: ABeeZee;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.14px;
+    margin-left: 4px;
+    margin-bottom: 5px;
+}
+
+.reproduct-link {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.link-container {
+    margin-bottom: 12px;
+    display: flex;
+    padding: 12px 12px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid #B0B0B0;
+}
+
+.link-item {
+    display: flex;
+    flex-direction: column;
+    /* 세로로 나열하도록 설정 */
+}
+
+.ingredient-name {
+    margin-bottom: 5px;
+    color: #4D4D4D;
+    font-family: ABeeZee;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.14px;
+}
+
+.link-url a {
+    color: #B0B0B0;
+    font-family: ABeeZee;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+
+
+
+.reproduct-content {
+    color: #333;
+    font-family: ABeeZee;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+    letter-spacing: -0.14px;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+
+
+.product-people {
+    color: #191919;
+    font-family: ABeeZee;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.14px;
+    margin-bottom: 17px;
+}
+
+
+.divider {
+    width: 340px;
+    height: 2px;
+    background: #ededed;
+}
+
+.product-recipe-header {
+    color: #191919;
+    font-family: ABeeZee;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.16px;
+    margin-top: 20px;
+    margin-bottom: 16px;
+}
+
+.recipe-card-container {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 50px;
+}
+
+.recipe-card {
+    width: 112px;
+    height: 144px;
+    border-radius: 8px;
+    background: #D9D9D9;
+    margin-right: 6px;
+}
+
+.recipe-card-name {
+    display: flex;
+    width: 95.709px;
+    height: 27.273px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.64);
+    margin-top: 108px;
+    margin-left: 8px;
+}
+

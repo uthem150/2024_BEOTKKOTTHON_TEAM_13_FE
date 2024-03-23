@@ -1,0 +1,225 @@
+.header-icon {
+  /* width: 375px; */
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+  padding-bottom: 15px; /*dh*/
+  border-bottom: 0.5px solid lightgray; /* 상단에 실선 추가 */
+}
+
+.logo-img {
+  width: 36px;
+  height: 37px;
+  margin-left: 16px;
+}
+
+.right-header img {
+  margin-right: 16px;
+  cursor: pointer;
+}
+
+.main-body {
+  height: 645px;
+  width: 100%;
+  max-height: 645px;
+  overflow-y: auto;
+}
+
+/* 추천레시피 */
+.title {
+  clear: both;
+  width: 360px;
+  margin-top: 30px;
+  height: 200px;
+  padding-left: 12px;
+}
+
+.recipe-name {
+  color: #191919;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.grd-name {
+  color: #191919;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.recipe-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.more {
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+}
+
+.a {
+  text-decoration: none;
+}
+
+.more img {
+  margin-left: 8px;
+  margin-right: 16px;
+}
+
+.recipePhoto {
+  margin-top: 12px;
+  display: flex;
+  height: 144px;
+  max-width: 375px;
+  overflow-x: auto;
+  gap: 8px;
+}
+
+.rec-photo {
+  width: 112px;
+  height: 140px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.photoStyle {
+  position: relative;
+  bottom: 54px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 8px;
+  align-items: center;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.photoStyle span {
+  background-color: white;
+  border-radius: 4px;
+  padding: 4px 10px;
+  opacity: 0.8;
+  max-width: 80px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.photoStyle img {
+  position: relative;
+  bottom: 88px;
+  left: 40px;
+  cursor: pointer;
+}
+
+/* 핫한 식품 */
+.gredient {
+  margin-top: 50px;
+  padding: 0 16px;
+}
+
+.saleGrd {
+  display: flex;
+  margin-top: 10px;
+  padding: 16px 0;
+  cursor: pointer;
+}
+
+.grd-img {
+  width: 92px;
+  height: 92px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  margin-right: 16px;
+  background-color: #d9d9d9;
+}
+
+.sell-title {
+  display: flex;
+  align-items: center; /*아이콘 수평정렬*/
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.sell-title img {
+  margin-left: 25px;
+}
+
+.seller {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin-top: 13px;
+  font-size: 14px;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  color: #666;
+  font-size: 14px;
+}
+
+.tags {
+  display: flex;
+}
+
+.tags div {
+  margin-right: 12px; /* 해시태그 사이의 간격 조절 */
+  padding: 4px 10px; /* 해시태그의 내부 여백 설정 */
+  font-size: 14px;
+  color: #404040;
+  background-color: #efefef;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tags div:last-child {
+  margin-right: 0; /* 마지막 해시태그의 오른쪽 마진 제거 */
+}
+
+.mainpage-container {
+  overflow-y: hidden;
+  height: 100vh;
+}
+
+.sale-gredient-container {
+  margin-bottom: 40px;
+}
+
+.plus {
+  position: absolute;
+  bottom: 90px;
+  right: 24px;
+  padding: 12px;
+  border-radius: 100px;
+  background: #ffd31a;
+}
+
+.dropup {
+  position: absolute;
+  bottom: 140px;
+  right: 24px;
+}
+.link-style {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 8px;
+  font-size: 14px;
+  color: #333;
+  border: 1px solid #333;
+  border-radius: 100px;
+  background-color: #fff;
+  text-decoration: none;
+}

@@ -1,0 +1,41 @@
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    /* 화면 전체 높이를 차지하도록 설정 */
+    padding: 16px;
+}
+
+.input-container {
+    position: relative;
+    display: flex;
+    display: inline-block;
+    margin: 16px;
+    width: 100%;
+    margin-bottom: 37px;
+    /* 입력란과 아이콘이 한 줄에 나타나도록 함 */
+}
+
+.product-search {
+    display: flex;
+    width: 100%;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+    background: var(--grey-90, #E6E6E6);
+    /* 아이콘 너비 + 여백 만큼의 오른쪽 여백 추가 */
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    /* 아이콘을 오른쪽에 위치시키고자 하는 만큼의 여백 설정 */
+    transform: translateY(-50%);
+    /* 세로 중앙 정렬 */
+}
+

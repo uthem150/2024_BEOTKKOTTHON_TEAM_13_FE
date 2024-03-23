@@ -1,0 +1,144 @@
+.room-header{
+    width: 343px;
+    height: 70px;
+    margin-top: 54px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.top-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rt-header img{
+    margin-left: 16px;
+    cursor: pointer;
+}
+
+.product{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: -30px;
+}
+.product-img{
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: #D9D9D9;
+}
+
+.drop{
+    display: flex;
+    align-items: flex-end;
+    padding: 4px;
+    margin: 8px 0 0 auto;
+    border-radius: 100px;
+    background-color: #E6E6E6;
+}
+
+.drop.rounded{
+    border-radius: 100px 100px 0 0;
+}
+
+.dropdown {
+    width: 76px;
+    padding: 12px 8px 12px 4px;
+    margin: -4px 0 0 auto;
+    border-radius: 8px 0 8px 8px;
+    background: #E6E6E6;
+  }
+
+
+.dropdown button{    
+    display: flex;
+    margin-left: auto;
+    padding: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    background-color: #FFDC25;
+}
+
+.room-body{
+    width: 343px;
+    height: 612px;
+    max-height: 612px ;
+    overflow-y: auto;
+    margin: 16px;
+}
+
+.message{
+    display: inline-flex;
+    padding: 10px 14px;
+    align-items: flex-start;
+    border-radius: 0px 8px 8px 8px;
+    background: #E1E1E1;
+    font-size: 14px;
+    font-weight: 400;
+    color: #191919;
+}
+
+.input-msg{
+    position: absolute;
+    bottom: 42px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 311px;
+    height: 56px;
+    padding: 0px 16px;
+    margin: 0 14px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.12);
+}
+.input-msg img{    
+    cursor: pointer;
+}
+
+.send{
+    padding: 4px;
+    border-radius: 8px;
+    background-color: #FFDC25;
+}
+
+.input-msg input{
+    width: 239px;
+    border: none;
+    font-size: 14px ;
+}
+
+input:focus {
+    outline: none;
+}
+
+.reviewModal{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.reviewModal input{
+    width: 255px;
+    height: 96px;
+    padding: 12px;
+    margin-top: 12px;
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.review-body{    
+    font-size: 14px;
+}
+
+.slider.slider-0{
+    background-color: #FFDC25;
+}
+.slider.slider-1{
+    background-color: #D9D9D9;
+}
+
+  

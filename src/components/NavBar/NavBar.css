@@ -1,0 +1,32 @@
+.navbar {
+  box-sizing: border-box; /*박dh*/
+  width: 100%;
+  height: 65px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 0px;
+  background-color: white;
+  border-top: 0.5px solid lightgray; /* 상단에 실선 추가 dh */
+}
+
+/* CSS 파일
+.nav-home.active,
+.nav-explore.active,
+.nav-map.active,
+.nav-chat.active {
+  background-color: transparent !important;
+  outline: none !important;
+} */
+
+.navbar a {
+  -webkit-tap-highlight-color: transparent; /*클릭시 하늘색 박스 제거 dh*/
+}
+
+.navbar img {
+  cursor: pointer;
+  padding: 0 10px;
+}

@@ -1,0 +1,116 @@
+.recently-search {
+    width: 100%;
+    text-align: left;
+    color: var(--black-10, #191919);
+
+    /* h16 */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.16px;
+}
+
+
+
+.search-delete-button {
+    font-size: 14px;
+    border: none;
+    background-color: transparent;
+}
+
+.recently-search-items {
+    margin-top: 16px;
+    width: 100%;
+
+}
+
+.recently-search-item {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    height: 49px;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--black-20, #333);
+    border-bottom: 1px solid var(--grey-90, #E6E6E6);
+
+    /* b14 */
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.14px;
+
+}
+
+.search-select-container{
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.search-select{
+    display: flex;
+    width: 100%;
+    height: 52px;
+    padding: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 16px;
+    background: var(--grey-95, #F2F2F2);
+}
+
+.search-option-buttons {
+    display: flex;
+    flex-grow: 1;
+    /* 옵션 버튼들이 컨테이너에 공간을 채우도록 함 */
+
+
+
+}
+
+.search-option-buttons button {
+    display: flex;
+    height: 44px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex: 1 0 0;
+    flex-grow: 1;
+    border: none;
+    border-radius: 12px;
+    background: var(--grey-95, #F2F2F2);
+    color: var(--grey-75, #BCBCBC);
+    text-align: center;
+
+    /* h16 */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.16px;
+
+}
+
+/* 선택된 버튼에 대한 스타일 */
+.search-option-buttons button.active {
+
+    background: var(--brand_color, #FFDC25);
+    color: var(--black-10, #191919);
+    text-align: center;
+
+    /* h16 */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.16px;
+    /* 선택된 버튼을 구별하기 위해 배경색 변경 */
+}

@@ -1,0 +1,79 @@
+.chatroom-header{
+    width: 375px;
+    height: 54px;
+}
+
+.chatlist-body{
+    width: 375px;
+    height: 675px;
+    max-height: 675px;
+    overflow-y: auto;
+}
+
+.chat {
+    width: 343px;
+    height: 40px;
+    align-items: center;
+    padding: 16px;
+    display: flex;
+    cursor: pointer;
+    
+    color: #191919;
+    font-size: 14px;
+    
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.sell-img {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    margin-right: 16px;
+    background-color: #D9D9D9;
+}
+
+.buyer {
+    display: flex;
+    width: 270px;
+    justify-content: space-between; 
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.text {
+    width: 240px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+.info {
+    display: none; /* 기본적으로 숨김 */
+    height: 17px;
+    padding: 4px 8px;
+    margin-top: 6px;
+    flex-shrink: 0;
+    justify-content: center;
+    border-radius: 100px;
+    background: #FFD951;
+
+    color: #191919;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/* .info 값이 0이 아닌 경우에만 보이도록 설정 */
+.info:not(:empty) {
+    display: flex;
+}
+
+.time {
+    font-size: 13px;
+    font-weight: 400;
+    color: #BCBCBC;
+}

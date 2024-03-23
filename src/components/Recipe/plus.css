@@ -1,0 +1,60 @@
+.plusGrd{
+    display: flex;
+    padding: 12px 0px;
+    border-bottom: 1px solid #E6E6E6;
+}
+
+.plusGrd input{
+    border: none;
+}
+
+.plusGrd input::placeholder {
+    color: #BCBCBC;
+}
+
+.plusStep{    
+    padding: 12px 0px;
+    border-bottom: 1px solid #E6E6E6;
+}
+
+.plusStep input{
+    border: none;
+}
+
+.plusStep input::placeholder {
+    color: #BCBCBC;
+}
+
+.input-step-img{
+    width: 343px;
+    height: 96px;
+    border-radius: 8px;
+    border: 1px solid #D9D9D9;
+    margin: 8px 0 14px 0;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.input-step-img img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.stepNum {
+    padding: 4px 8px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    background: #E6E6E6;
+
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+}
+
+input:focus {
+    outline: none;
+}
