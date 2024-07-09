@@ -1,141 +1,142 @@
-.recipe-header {    
-    width: 375px;
-    height : 24px;
-    margin-top: 56px;
+.recipe-header {
+  width: 100%;
+  height: 24px;
+  margin-top: 25px;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;    
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .recipe-header img {
-    cursor: pointer;
-    margin: 0 16px;
+  cursor: pointer;
+  margin: 0 16px;
 }
 
-.body{  
-    width: 359px;
-    height: 635px;
-    padding: 16px 0 0 16px;
-    overflow-y: auto;   
-    scrollbar-width: none; /* Firefox용 */
-    -ms-overflow-style: none; /* IE/Edge용 */
+.body {
+  margin: auto; /* 추가 중앙 정렬을 위해 */
+
+  width: 359px;
+  height: 75vh;
+  padding: 16px 0 0 16px;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox용 */
+  -ms-overflow-style: none; /* IE/Edge용 */
 }
 
 .body::-webkit-scrollbar {
-    display: none; /* Chrome/Safari용 */
+  display: none; /* Chrome/Safari용 */
 }
 
 .recipe-img {
-    width: 343px;
-    height: 232px;
-    flex-shrink: 0;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    background-color: #D9D9D9;
+  width: 343px;
+  height: 232px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  background-color: #d9d9d9;
 }
 
 .user {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin : -50px 0 30px -20px;
-    font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: -50px 0 30px -20px;
+  font-weight: 600;
 }
 
 .user img {
-    width: 64px;
-    height: 64px;
-    border-radius: 64px;
+  width: 64px;
+  height: 64px;
+  border-radius: 64px;
 }
 
-.recipe-title{
-    display: flex;
-    justify-content: space-between;
-    padding-right: 16px;
-    color: #191919;
-    font-size: 24px;
-    font-weight: 800;
+.recipe-title {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 16px;
+  color: #191919;
+  font-size: 24px;
+  font-weight: 800;
 }
 
 .indicate {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    margin-right: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-right: 10px;
 }
-.indicate img{
-    cursor: pointer;
-    padding: 4px;
-}
-
-
-.grd-tag {    
-    display: flex;
-    flex-wrap: wrap; 
-    margin-top: 16px;
-    gap: 12px;
+.indicate img {
+  cursor: pointer;
+  padding: 4px;
 }
 
-.grd-tag div { 
-    display: flex;
-    align-items: center;
-    padding: 4px 8px;
-    gap: 8px;
-    font-size: 14px;
-    font-weight: 400;
-    color: #191919;
-    background-color: #F2F2F2;
-    border-radius: 8px;
-    cursor: pointer;
+.grd-tag {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  gap: 12px;
+}
+
+.grd-tag div {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #191919;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .nutrition {
-    margin-top: 36px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
+  margin-top: 36px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
 }
 
 .step-img {
-    width: 343px;
-    height: 229px;
-    flex-shrink: 0;
-    border-radius: 8px;
-    background-color: hsl(0, 0%, 85%);
-    margin: 16px 12px 0 0;
+  width: 343px;
+  height: 229px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background-color: hsl(0, 0%, 85%);
+  margin: 16px 12px 0 0;
 }
 
 .cook {
-    margin-top: 42px;
-    margin-bottom: 16px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
+  margin-top: 42px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
 }
 
-.cook-step{
-    display: flex;
-    align-items: center;
-    margin: 16px 12px 8px 0;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #D9D9D9;
+.cook-step {
+  display: flex;
+  align-items: center;
+  margin: 16px 12px 8px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #d9d9d9;
 }
 
 .step1 {
-    padding: 5px;
-    margin-right: 12px;
-    flex-shrink: 0;
-    border-radius: 4px;
-    background: #F0D135;
+  padding: 5px;
+  margin-right: 12px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  background: #f0d135;
 
-    font-size: 14px;
-    font-weight: 400;
-    color: #333;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
 }
 
 .step1-detail {
-    font-size: 14px;
-    font-weight: 500;
-    color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
 }

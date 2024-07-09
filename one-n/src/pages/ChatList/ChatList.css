@@ -5,9 +5,10 @@
 
 .chatlist-body {
   width: 100%;
-  height: 760px;
-  max-height: 760px;
+  height: 85vh;
+  max-height: 85vh;
   overflow-y: auto;
+  padding-bottom: 15vh;
 }
 
 .chat {
