@@ -150,7 +150,7 @@ function MainPage() {
       {isSignupModalOpen && <Signup />}
 
 
-      <div className='header-container'><Header />
+      <div className='header-container'><Header /></div>
 
 
         <div className='main-body'>
@@ -192,7 +192,7 @@ function MainPage() {
           )}
         </div>
       </div>
-      </div>
+    
   );
 }
 

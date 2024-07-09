@@ -1,6 +1,6 @@
 .room-header{
     width: 343px;
-    height: 70px;
+    height: 50px;
     margin-top: 54px;
     padding: 12px 16px;
     border-bottom: 1px solid #D9D9D9;
@@ -98,7 +98,7 @@
 
 .input-msg{
     position: absolute;
-    bottom: 42px;
+    bottom: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
