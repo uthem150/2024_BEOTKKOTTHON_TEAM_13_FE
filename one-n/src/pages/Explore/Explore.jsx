@@ -7,6 +7,7 @@ import Masonry from "https://cdn.skypack.dev/react-masonry-css@1.0.16";
 
 const Explore = () => {
 
+  const baseUrl="https://n1.junyeong.dev/api";
   const navigate = useNavigate();
 
   const [data, setData] = useState([]);
@@ -33,13 +34,13 @@ const Explore = () => {
 
     // API 엔드포인트 URL 설정
    
-    const apiUrl = `http://20.39.188.154:8080/recipe/list?keyword=${searchKeyword}&page=1`;
+    const apiUrl = `${baseUrl}/recipe/list?keyword=${searchKeyword}&page=1`;
 
     axios.get(apiUrl)
       .then((response) => {
         const updatedData = response.data.map(item => ({
           ...item,
-          thumbnail_image: `http://20.39.188.154${item.thumbnail_image}`
+          thumbnail_image: `${baseUrl}${item.thumbnail_image}`
         }));
         setData(updatedData);
       })

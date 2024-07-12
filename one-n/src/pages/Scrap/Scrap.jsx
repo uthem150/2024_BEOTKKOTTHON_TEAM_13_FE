@@ -8,6 +8,7 @@ import Masonry from "https://cdn.skypack.dev/react-masonry-css@1.0.16";
 import { useNavigate } from 'react-router-dom';
 
 export default function Scrap() {
+    const baseUrl = "https://n1.junyeong.dev/api";
     const [satisfaction, setSatisfaction] = useState(null);
     const [data, setData] = useState([]);
     const [nickname, setNickname] = useState(null);
@@ -49,7 +50,7 @@ export default function Scrap() {
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
-                const response = await axios.get(`http://20.39.188.154:8080/user/info?session_id=${signinData}`);
+                const response = await axios.get(`${baseUrl}/user/info?session_id=${signinData}`);
                 setNickname(response.data.nickname);
                 setSatisfaction(response.data.user_rating * 100); // user_rating은 0.0에서 1.0 범위에 있으므로 100을 곱해서 퍼센트로 변환합니다.
             } catch (error) {
@@ -59,7 +60,7 @@ export default function Scrap() {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://20.39.188.154:8080/user/posts?session_id=${signinData}`);
+                const response = await axios.get(`${baseUrl}/user/posts?session_id=${signinData}`);
 
                 console.log(response.params);
                 console.log(response.data);
@@ -75,7 +76,7 @@ export default function Scrap() {
 
     const fetchLikedPosts = async () => {
         try {
-            const response = await axios.get(`http://20.39.188.154:8080/user/likes?session_id=${signinData}&type=post`);
+            const response = await axios.get(`${baseUrl}/user/likes?session_id=${signinData}&type=post`);
             setPickProducts(response.data);
         } catch (error) {
             console.error('Error fetching liked posts:', error);
@@ -84,7 +85,7 @@ export default function Scrap() {
 
     // const fetchLikedRecipe = async () => {
     //     try {
-    //         const response = await axios.get('http://20.39.188.154:8080/user/likes?session_id=test_session_id&type=recipe');
+    //         const response = await axios.get('${baseUrl}/user/likes?session_id=test_session_id&type=recipe');
     //         setLikedRecipe(response.data);
     //     } catch (error) {
     //         console.error('Error fetching liked posts:', error);
@@ -92,13 +93,13 @@ export default function Scrap() {
     // };
 
     const fetchLikedRecipe = async () => {
-        const apiUrl = `http://20.39.188.154:8080/user/likes?session_id=${signinData}&type=recipe`
+        const apiUrl = `${baseUrl}/user/likes?session_id=${signinData}&type=recipe`
 
         axios.get(apiUrl)
             .then((response) => {
                 const updatedData = response.data.map(item => ({
                     ...item,
-                    thumbnail_image: `http://20.39.188.154${item.thumbnail_image}`
+                    thumbnail_image: `${baseUrl}${item.thumbnail_image}`
                 }));
                 console.log("요청감");
                 console.log(updatedData);
@@ -112,13 +113,13 @@ export default function Scrap() {
 
 
     const fetchPostRecipe = async () => {
-        const apiUrl = `http://20.39.188.154:8080/user/recipes?session_id=test_${signinData}`;
+        const apiUrl = `${baseUrl}/user/recipes?session_id=test_${signinData}`;
 
         axios.get(apiUrl)
             .then((response) => {
                 const updatedData = response.data.map(item => ({
                     ...item,
-                    thumbnail_image: `http://20.39.188.154${item.thumbnail_image}`
+                    thumbnail_image:`${baseUrl}${item.thumbnail_image}`
                 }));
                 setData(updatedData);
             })

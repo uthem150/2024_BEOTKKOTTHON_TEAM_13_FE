@@ -8,15 +8,12 @@ import { NavBar } from '../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Back } from '../../assets/back.svg'
 
-
-
 export default function SearchPage() {
+    const baseUrl = "https://n1.junyeong.dev/api";
     const [searchKeyword, setSearchKeyword] = useState('');
     const [searchedData, setSearchedData] = useState(null); // 검색 결과를 저장할 상태
     const [recentlySearch, setRecentlySearch] = useState([]);
     const navigate = useNavigate();
-    
-
 
     useEffect(() => {
         // 세션 스토리지에서 최근 검색어를 가져옴
@@ -36,7 +33,7 @@ export default function SearchPage() {
         // 검색어가 비어있으면 요청을 보내지 않음
         if (!searchKeyword.trim()) return;
 
-        const url = 'http://20.39.188.154:8080/post/list';
+        const url = `${baseUrl}/post/list`;
         const params = {
             type: 'all',
             bcode: storedBcode,

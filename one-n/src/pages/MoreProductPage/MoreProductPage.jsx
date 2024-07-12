@@ -6,6 +6,7 @@ import './MoreProductPage.css'
 import { ReactComponent as Back } from '../../assets/back.svg'
 
 function MoreProductPage() {
+    const baseUrl = "https://n1.junyeong.dev/api";
     const [data, setData] = useState([]);
     const [page, setPage] = useState(1);
     const [products, setProducts] = useState([]);
@@ -29,7 +30,7 @@ function MoreProductPage() {
     const getFetchData_i = () => {
         const storedBcode = sessionStorage.getItem('myBcode');
         console.log("요청을 보냈습니다");
-        const url = `http://20.39.188.154:8080/post/list?type=ingd&bcode=${storedBcode}&keyword=&page=${page}`;
+        const url = `${baseUrl}/post/list?type=ingd&bcode=${storedBcode}&keyword=&page=${page}`;
         console.log(url);
         fetch(url)
             .then((res) => res.json())
@@ -43,7 +44,7 @@ function MoreProductPage() {
     const getFetchData_r = () => {
         const storedBcode = sessionStorage.getItem('myBcode');
         console.log("요청을 보냈습니다2222");
-        const url = `http://20.39.188.154:8080/post/list?type=r_ingd&bcode=${storedBcode}&keyword=&page=${page}`;
+        const url = `${baseUrl}/post/list?type=r_ingd&bcode=${storedBcode}&keyword=&page=${page}`;
         console.log(url);
         fetch(url)
             .then((res) => res.json())

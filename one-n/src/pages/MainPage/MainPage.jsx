@@ -16,6 +16,7 @@ import Signup from '../../components/Sign/Signup';
 
 function MainPage() {
 
+  const baseUrl="https://n1.junyeong.dev/api";
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
@@ -50,13 +51,13 @@ function MainPage() {
 
   useEffect(() => {
     // API 엔드포인트 URL 설정
-    const apiUrl = 'http://20.39.188.154:8080/recipe/brief';
+    const apiUrl = `${baseUrl}/recipe/brief`;
 
     axios.get(apiUrl)
       .then((response) => {
         const updatedData = response.data.map(item => ({
           ...item,
-          thumbnail_image: `http://20.39.188.154${item.thumbnail_image}`
+          thumbnail_image: `${baseUrl}/recipe/brief/${item.thumbnail_image}`
         }));
         setData(updatedData);
       })
@@ -131,7 +132,7 @@ function MainPage() {
 
   // fetchProducts 함수 정의
   const fetchProducts = (bCode) => {
-    const url = `http://20.39.188.154:8080/post/list?type=all&bcode=${bCode}&keyword=&page=${page}`;
+    const url = `${baseUrl}/post/list?type=all&bcode=${bCode}&keyword=&page=${page}`;
     console.log(url);
     fetch(url)
       .then((res) => res.json())
@@ -147,7 +148,7 @@ function MainPage() {
   return (
     <div className='mainpage-container'>
       {/* Signup 모달 */}
-      {isSignupModalOpen && <Signup />}
+      {/* {isSignupModalOpen && <Signup />} */}
 
 
       <div className='header-container'><Header /></div>

@@ -10,6 +10,7 @@ import FiledPick from '../../assets/filedproductpick.png'
 import Mypick from '../../assets/productpick.png'
 
 export default function ReProductDetail() {
+    const baseUrl = "https://n1.junyeong.dev/api";
     const { productId } = useParams();
     const navigate = useNavigate();
     const [daysRemaining, setDaysRemaining] = useState(null);
@@ -24,7 +25,7 @@ export default function ReProductDetail() {
     const fetchProductData = async (productId) => {
         // productId를 이용하여 백엔드에서 상품 데이터를 가져오는 비동기 함수
         try {
-            const response = await fetch(`http://20.39.188.154:8080/post/${productId}`);
+            const response = await fetch(`${baseUrl}/post/${productId}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
