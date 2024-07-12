@@ -1,10 +1,10 @@
 .explore-header {
   display: flex;
-  margin-top: 20px; /*dh*/
+  margin-top: 20px;
 }
 
 .search {
-  width: 100%; /*dh*/
+  width: 100%;
   height: 18px;
   margin: 0 16px;
   padding: 12px 16px;
@@ -15,9 +15,14 @@
   background: #f0f0f0;
 }
 
+.search:focus {
+  outline: none;
+  border: 2px solid #eaed35; /* 포커스 시 테두리 색상 변경 */
+}
+
 .explore-header img {
   position: absolute;
-  top: 30px; /*dh*/
+  top: 30px;
   right: 32px;
 }
 
@@ -38,4 +43,29 @@
   max-width: 100%;
   border-radius: 10px;
   margin-bottom: 8px;
+}
+
+.search-history {
+  background-color: rgb(224, 224, 224);
+  border-radius: 10px;
+  margin: 0 15px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.search-history-item {
+  border: 1px solid gray;
+  display: flex;
+  padding: 7px;
+  justify-content: space-between;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: fill 0.2s ease-in-out;
+}
+
+.delete-btn {
+  cursor: pointer;
+  transition: fill 0.2s ease-in-out;
 }
