@@ -13,6 +13,7 @@ import Mypick from '../../assets/productpick.png'
 
 
 export default function ProductDetail() {
+    const baseUrl = "https://n1.junyeong.dev/api";
     const { productId } = useParams();
     const [productData, setProductData] = useState({});
     const [daysRemaining, setDaysRemaining] = useState(null);
@@ -23,13 +24,13 @@ export default function ProductDetail() {
 
     useEffect(() => {
         // API 엔드포인트 URL 설정
-        const apiUrl = `http://20.39.188.154:8080/post/${productId}`;
+        const apiUrl = `${baseUrl}/post/${productId}`;
 
         axios.get(apiUrl)
             .then((response) => {
                 const updatedData = response.data.linked_recipes.map(item => ({
                     ...item,
-                    thumbnail_image: `http://20.39.188.154${item.thumbnail_image}`
+                    thumbnail_image: `${baseUrl}${item.thumbnail_image}`
                 }));
                 console.log("출력출력");
                 console.log(updatedData);
@@ -59,7 +60,7 @@ export default function ProductDetail() {
     const fetchProductData = async (productId) => {
         // productId를 이용하여 백엔드에서 상품 데이터를 가져오는 비동기 함수
         try {
-            const response = await fetch(`http://20.39.188.154:8080/post/${productId}`);
+            const response = await fetch(`${baseUrl}/post/${productId}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

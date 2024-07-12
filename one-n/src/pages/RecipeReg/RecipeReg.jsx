@@ -13,6 +13,7 @@ import { PlusStep } from "../../components/Recipe/PlusStep";
 import { PlusGrd } from "../../components/Recipe/PlusGrd";
 
 function RecipeReg() {
+  const baseUrl = "https://n1.junyeong.dev/api";
   const navigate = useNavigate();
 
   const [signinData, setSigninData] = useState(null);

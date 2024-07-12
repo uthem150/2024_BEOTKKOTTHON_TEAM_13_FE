@@ -4,9 +4,9 @@ import ReactModal from 'react-modal';
 
 function Signup () {
       
+  const baseUrl="https://n1.junyeong.dev/api";
   const [signupModalOpen, setSignupModalOpen] = useState(true);
 
-  
   const [signup, setSignup] = useState('');
   const [signin, setSignin] = useState('');
 
@@ -18,7 +18,7 @@ function Signup () {
     const checkSessionExpiration = async () => {
       try {
         // 세션 만료 여부를 확인하는 API 요청을 보냅니다.
-        const response = await axios.get(`http://20.39.188.154:8080/chats/list?session_id=${signin}`);
+        const response = await axios.get(`${baseUrl}/chats/list?session_id=${signin}`);
         const sessionExpired = response.data.expired;
         if (sessionExpired) {
           // 세션이 만료되었을 경우 로그인 창을 엽니다.
@@ -34,7 +34,7 @@ function Signup () {
   }, []);
 
   const handleSignup = () => {
-    const apiUrlSignup = 'http://20.39.188.154:8080/user/signup';
+    const apiUrlSignup = `${baseUrl}/user/signup`;
     const userData1 = {
       user_id: userId,
       nickname: nickname,
@@ -55,7 +55,7 @@ function Signup () {
   };
 
   const handleSignin = (userId) => {
-    const apiUrlSignin = 'http://20.39.188.154:8080/user/signin';
+    const apiUrlSignin = `${baseUrl}/user/signin`;
     const userData2 = {
       user_id: userId
     };

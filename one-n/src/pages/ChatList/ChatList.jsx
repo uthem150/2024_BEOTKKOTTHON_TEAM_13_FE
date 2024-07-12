@@ -4,6 +4,7 @@ import './ChatList.css'
 import { useNavigate } from 'react-router-dom';
 
 function ChatList() {
+  const baseUrl = "https://n1.junyeong.dev/api";
   const navigate = useNavigate();
 
   const [chat, setChat] = useState([]);
@@ -26,9 +27,9 @@ function ChatList() {
 
   useEffect(() => {
       // 참가 채팅방
-      const apiUrl = 'http://20.39.188.154:8080/chats/list?session_id=test_session_id';
+      const apiUrl = `${baseUrl}/chats/list?session_id=test_session_id`;
       // 미확인 채팅
-      const unreadApiUrl = 'http://20.39.188.154:8080/chats/unread-messages?session_id=test_session_id';
+      const unreadApiUrl = `${baseUrl}/chats/unread-messages?session_id=test_session_id`;
 
       // 채팅 목록
       axios.get(apiUrl)

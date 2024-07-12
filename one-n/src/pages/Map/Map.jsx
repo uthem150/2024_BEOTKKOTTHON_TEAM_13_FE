@@ -9,6 +9,7 @@ import { MyContext } from '../../components/MyContextProvider/MyContextProvider'
 
 
 const Map = () => {
+    const baseUrl = "https://n1.junyeong.dev/api";
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [products, setProducts] = useState([]);
     const [marker, setMarker] = useState(null);
@@ -30,7 +31,7 @@ const Map = () => {
     const getFetchData = () => {
         const storedBcode = sessionStorage.getItem('myBcode');
         console.log("요청을 보냈습니다");
-        const url = `http://20.39.188.154:8080/post/list?type=all&bcode=${storedBcode}&keyword=&page=${page}`;
+        const url = `${baseUrl}/post/list?type=all&bcode=${storedBcode}&keyword=&page=${page}`;
         console.log(url);
         fetch(url)
             .then((res) => res.json())

@@ -14,6 +14,7 @@ import save from "../../assets/icons/save.png";
 import { ReviewSelect } from "../../components/Review/ReviewSelect";
 
 function ChatRoom() {
+  const baseUrl = "https://n1.junyeong.dev/api";
   const navigate = useNavigate();
   const { chatId } = useParams();
 
@@ -55,7 +56,7 @@ function ChatRoom() {
 
   // 채팅방 퇴장
   const onClickExit = () => {
-    const apiUrl = "http://20.39.188.154:8080/chat/exit-user";
+    const apiUrl = `${baseUrl}/chat/exit-user`;
 
     axios
       .post(apiUrl)
@@ -80,13 +81,13 @@ function ChatRoom() {
   // 채팅방 전체 메시지
   useEffect(() => {
     
-    const apiUrl = `http://20.39.188.154:8080/chat/init-messages?id=${chatId}&session_id=${signinData}`;
+    const apiUrl = `${baseUrl}/chat/init-messages?id=${chatId}&session_id=${signinData}`;
    
     axios.get(apiUrl)
       .then((response) => {
          const updatedData = response.data.messages.map(item => ({
           ...item,
-          profile_image: `http://20.39.188.154${item.profile_image}` // 이미지의 절대 경로 추가
+          profile_image: `${baseUrl}${item.profile_image}` // 이미지의 절대 경로 추가
         }));
         setData(updatedData);
         setTitleData(response.data.post_title);
@@ -98,7 +99,7 @@ function ChatRoom() {
 
       // 웹 소켓 연결 설정
       useEffect(() => {
-        const ws = new WebSocket("ws://20.39.188.154:8080/ws");
+        const ws = new WebSocket("ws://n1.junyeong.dev/api/ws");
         setWs(ws);
         
         // 컴포넌트가 unmount 될 때 웹 소켓 연결 해제
