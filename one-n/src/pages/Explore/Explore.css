@@ -74,3 +74,18 @@
 .search-btn {
   cursor: pointer;
 }
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  padding: 5px 15px;
+  width: 100%;
+}
+
+.tab {
+  border: 1px solid gray;
+  padding: 7px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}

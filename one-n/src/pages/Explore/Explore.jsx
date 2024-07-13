@@ -7,13 +7,15 @@ import Masonry from "https://cdn.skypack.dev/react-masonry-css@1.0.16";
 
 const Explore = () => {
   const baseUrl = "https://n1.junyeong.dev/api";
+  const imgBaseUrl = "https://n1.junyeong.dev/";
   const navigate = useNavigate();
 
-  const [data, setData] = useState([]); //검색 결과 데이터 저장
-  const [searchKeyword, setSearchKeyword] = useState(""); //입력한 검색어 저장
-  const [signinData, setSigninData] = useState(null); //로그인 데이터 저장
-  const [searchHistory, setSearchHistory] = useState([]); //로컬 스토리지에 저장된 목록
-  const [searchClicked, setSearchClicked] = useState(false); //검색버튼이 눌렸는지 확인
+  const [data, setData] = useState([]); // 검색 결과 데이터 저장
+  const [searchKeyword, setSearchKeyword] = useState(""); // 입력한 검색어 저장
+  const [signinData, setSigninData] = useState(null); // 로그인 데이터 저장
+  const [searchHistory, setSearchHistory] = useState([]); // 로컬 스토리지에 저장된 목록
+  const [searchClicked, setSearchClicked] = useState(false); // 검색버튼이 눌렸는지 확인
+  const [activeTab, setActiveTab] = useState("ingd"); // 현재 활성화된 탭
 
   useEffect(() => {
     //sessionStorage에 저장된 로그인 데이터
@@ -43,6 +45,9 @@ const Explore = () => {
     // 빈 문자열 검색일때 종료
     if (searchKeyword.trim() === "") return;
 
+    // 이전 데이터 초기화
+    setData([]);
+
     //중복된 키워드 제거하고, 새로운 검색어를 맨 앞에 추가
     const updatedSearchHistory = [
       searchKeyword,
@@ -52,19 +57,26 @@ const Explore = () => {
     //localStorage에 검색 기록 저장
     localStorage.setItem("searchHistory", JSON.stringify(updatedSearchHistory));
 
-    fetchRecipes(searchKeyword);
     setSearchClicked(true);
+    fetchRecipes(searchKeyword);
   };
 
-  const fetchRecipes = (searchKeyword) => {
-    const apiUrl = `${baseUrl}/recipe/list?keyword=${searchKeyword}&page=1`;
+  const fetchRecipes = (fetchType) => {
+    setData([]); //이전 페치 데이터 삭제
 
+    const apiUrl = searchClicked
+      ? // ? `${baseUrl}/${activeTab}/list?keyword=${searchKeyword}&page=1` //검색버튼 누른 후 받아올 주소
+        // : `${baseUrl}/recipe/list?keyword=${searchKeyword}&page=1`; //처음 검색할 때 받아올 주소
+        `${baseUrl}/post/list?bcode=&type=${activeTab}&keyword=${searchKeyword}&page=1` //검색버튼 누른 후 받아올 주소
+      : `${baseUrl}/post/list?bcode=&type=all&keyword=${searchKeyword}&page=1`; //처음 검색할 때 받아올 주소
+
+    console.log(apiUrl);
     axios
       .get(apiUrl)
       .then((response) => {
         const updatedData = response.data.map((item) => ({
           ...item,
-          thumbnail_image: `${baseUrl}/${item.thumbnail_image}`,
+          thumbnail_image: `${imgBaseUrl}${item.image}`,
         }));
         setData(updatedData); //받아온 데이터 저장
         console.log(updatedData);
@@ -88,7 +100,18 @@ const Explore = () => {
     if (searchKeyword.trim() !== "") {
       fetchRecipes(searchKeyword);
     }
-  }, [searchKeyword]);
+  }, [searchKeyword, activeTab, searchClicked]);
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+
+    // 이전 데이터 초기화
+    setData([]);
+
+    if (searchKeyword.trim() !== "") {
+      fetchRecipes(searchKeyword);
+    }
+  };
 
   return (
     <>
@@ -108,6 +131,29 @@ const Explore = () => {
         />
       </div>
 
+      {searchClicked && (
+        <div className="tabs">
+          <div
+            style={{
+              backgroundColor: activeTab === "ingd" ? "yellow" : "white",
+            }}
+            className="tab"
+            onClick={() => handleTabClick("ingd")}
+          >
+            재료
+          </div>
+          <div
+            style={{
+              backgroundColor: activeTab === "r_ingd" ? "yellow" : "white",
+            }}
+            className="tab"
+            onClick={() => handleTabClick("r_ingd")}
+          >
+            레시피
+          </div>
+        </div>
+      )}
+
       {!searchClicked && searchHistory && searchHistory.length > 0 && (
         <div>
           <div style={{ fontSize: "15px", margin: "15px 15px" }}>
@@ -115,8 +161,12 @@ const Explore = () => {
           </div>
           <div className="search-history">
             {searchHistory.map((keyword, index) => (
-              <div key={index} className="search-history-item">
-                <span onClick={() => setSearchKeyword(keyword)}>{keyword}</span>
+              <div
+                onClick={() => setSearchKeyword(keyword)}
+                key={index}
+                className="search-history-item"
+              >
+                <span>{keyword}</span>
                 <div
                   className="delete-btn"
                   onClick={() => handleDeleteHistory(keyword)}
