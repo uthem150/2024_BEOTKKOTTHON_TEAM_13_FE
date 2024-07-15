@@ -18,20 +18,20 @@ const Explore = () => {
   const [activeTab, setActiveTab] = useState("ingd"); // 현재 활성화된 탭
 
   useEffect(() => {
-    //sessionStorage에 저장된 로그인 데이터
+    // sessionStorage에 저장된 로그인 데이터
     const storedSigninData = sessionStorage.getItem("signinData");
     if (storedSigninData) {
       setSigninData(JSON.parse(storedSigninData));
     }
 
-    //localStorage에 저장된 검색 기록
+    // localStorage에 저장된 검색 기록
     const storedSearchHistory = localStorage.getItem("searchHistory");
     if (storedSearchHistory) {
       setSearchHistory(JSON.parse(storedSearchHistory));
     }
   }, []);
 
-  //사진 클릭하면 /recipe/{id} 경로로 이동
+  // 사진 클릭하면 /recipe/{id} 경로로 이동
   const handlePhotoClick = (id) => {
     navigate(`/recipe/${id}`);
   };
@@ -42,35 +42,34 @@ const Explore = () => {
   };
 
   const handleSearch = () => {
-    // 빈 문자열 검색일때 종료
+    // 빈 문자열 검색일 때 종료
     if (searchKeyword.trim() === "") return;
 
     // 이전 데이터 초기화
     setData([]);
 
-    //중복된 키워드 제거하고, 새로운 검색어를 맨 앞에 추가
+    // 중복된 키워드 제거하고, 새로운 검색어를 맨 앞에 추가
     const updatedSearchHistory = [
       searchKeyword,
       ...searchHistory.filter((keyword) => keyword !== searchKeyword),
     ];
     setSearchHistory(updatedSearchHistory);
-    //localStorage에 검색 기록 저장
+    // localStorage에 검색 기록 저장
     localStorage.setItem("searchHistory", JSON.stringify(updatedSearchHistory));
 
     setSearchClicked(true);
-    fetchRecipes(searchKeyword);
+    fetchRecipes(searchKeyword, activeTab);
   };
 
-  const fetchRecipes = (fetchType) => {
-    setData([]); //이전 페치 데이터 삭제
+  const fetchRecipes = (keyword, tab) => {
+    setData([]); // 이전 페치 데이터 삭제
 
     const apiUrl = searchClicked
-      ? // ? `${baseUrl}/${activeTab}/list?keyword=${searchKeyword}&page=1` //검색버튼 누른 후 받아올 주소
-        // : `${baseUrl}/recipe/list?keyword=${searchKeyword}&page=1`; //처음 검색할 때 받아올 주소
-        `${baseUrl}/post/list?bcode=&type=${activeTab}&keyword=${searchKeyword}&page=1` //검색버튼 누른 후 받아올 주소
-      : `${baseUrl}/post/list?bcode=&type=all&keyword=${searchKeyword}&page=1`; //처음 검색할 때 받아올 주소
+      ? `${baseUrl}/post/list?bcode=&type=${tab}&keyword=${keyword}&page=1` // 검색 버튼을 누른 후 받아올 주소
+      : `${baseUrl}/post/list?bcode=&type=all&keyword=${keyword}&page=1`; // 처음 검색할 때 받아올 주소
 
     console.log(apiUrl);
+
     axios
       .get(apiUrl)
       .then((response) => {
@@ -78,7 +77,7 @@ const Explore = () => {
           ...item,
           thumbnail_image: `${imgBaseUrl}${item.image}`,
         }));
-        setData(updatedData); //받아온 데이터 저장
+        setData(updatedData); // 받아온 데이터 저장
         console.log(updatedData);
       })
       .catch((error) => {
@@ -86,8 +85,10 @@ const Explore = () => {
       });
   };
 
-  const handleDeleteHistory = (keyword) => {
-    //해당 keyword지운 배열 생성
+  const handleDeleteHistory = (keyword, e) => {
+    e.stopPropagation(); // 이벤트 전파를 중단하여 fetchRecipes 호출 방지
+
+    // 해당 keyword 지운 배열 생성
     const updatedSearchHistory = searchHistory.filter(
       (item) => item !== keyword
     );
@@ -96,11 +97,11 @@ const Explore = () => {
   };
 
   useEffect(() => {
-    //빈 문자열 아니면, fetch
+    // 빈 문자열 아니면, fetch
     if (searchKeyword.trim() !== "") {
-      fetchRecipes(searchKeyword);
+      fetchRecipes(searchKeyword, activeTab);
     }
-  }, [searchKeyword, activeTab, searchClicked]);
+  }, [searchKeyword, activeTab]);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -109,7 +110,7 @@ const Explore = () => {
     setData([]);
 
     if (searchKeyword.trim() !== "") {
-      fetchRecipes(searchKeyword);
+      fetchRecipes(searchKeyword, tab);
     }
   };
 
@@ -162,14 +163,18 @@ const Explore = () => {
           <div className="search-history">
             {searchHistory.map((keyword, index) => (
               <div
-                onClick={() => setSearchKeyword(keyword)}
+                onClick={() => {
+                  setSearchKeyword(keyword);
+                  setSearchClicked(true);
+                  fetchRecipes(keyword, activeTab);
+                }}
                 key={index}
                 className="search-history-item"
               >
                 <span>{keyword}</span>
                 <div
                   className="delete-btn"
-                  onClick={() => handleDeleteHistory(keyword)}
+                  onClick={(e) => handleDeleteHistory(keyword, e)}
                 >
                   <svg
                     data-slot="icon"
