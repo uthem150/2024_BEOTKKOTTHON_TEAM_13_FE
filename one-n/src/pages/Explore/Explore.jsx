@@ -58,13 +58,14 @@ const Explore = () => {
     localStorage.setItem("searchHistory", JSON.stringify(updatedSearchHistory));
 
     setSearchClicked(true);
-    fetchRecipes(searchKeyword, activeTab);
+    fetchRecipes(searchKeyword, activeTab, true);
   };
 
-  const fetchRecipes = (keyword, tab) => {
+  //사용자가 검색버튼 클릭했는지 여부
+  const fetchRecipes = (keyword, tab, isSearchClicked) => {
     setData([]); // 이전 페치 데이터 삭제
 
-    const apiUrl = searchClicked
+    const apiUrl = isSearchClicked
       ? `${baseUrl}/post/list?bcode=&type=${tab}&keyword=${keyword}&page=1` // 검색 버튼을 누른 후 받아올 주소
       : `${baseUrl}/post/list?bcode=&type=all&keyword=${keyword}&page=1`; // 처음 검색할 때 받아올 주소
 
@@ -78,7 +79,7 @@ const Explore = () => {
           thumbnail_image: `${imgBaseUrl}${item.image}`,
         }));
         setData(updatedData); // 받아온 데이터 저장
-        console.log(updatedData);
+        // console.log(updatedData);
       })
       .catch((error) => {
         console.error("API 요청 에러:", error);
@@ -86,7 +87,7 @@ const Explore = () => {
   };
 
   const handleDeleteHistory = (keyword, e) => {
-    e.stopPropagation(); // 이벤트 전파를 중단하여 fetchRecipes 호출 방지
+    e.stopPropagation(); // 이벤트 전파를 중단하여 fetchRecipes 호출 방지(부모 요소로 이벤트 전달되지 않도록)
 
     // 해당 keyword 지운 배열 생성
     const updatedSearchHistory = searchHistory.filter(
@@ -96,12 +97,20 @@ const Explore = () => {
     localStorage.setItem("searchHistory", JSON.stringify(updatedSearchHistory));
   };
 
+  //검색버튼 누르기 전
   useEffect(() => {
-    // 빈 문자열 아니면, fetch
-    if (searchKeyword.trim() !== "") {
-      fetchRecipes(searchKeyword, activeTab);
+    //searchClicked가 false일 때만 fetchRecipes 함수 호출
+    if (searchKeyword.trim() !== "" && !searchClicked) {
+      fetchRecipes(searchKeyword, activeTab, false);
     }
-  }, [searchKeyword, activeTab]);
+  }, [searchKeyword]);
+
+  //검색버튼 누른 후
+  useEffect(() => {
+    if (searchKeyword.trim() !== "" && searchClicked) {
+      fetchRecipes(searchKeyword, activeTab, true);
+    }
+  }, [activeTab]);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -110,7 +119,7 @@ const Explore = () => {
     setData([]);
 
     if (searchKeyword.trim() !== "") {
-      fetchRecipes(searchKeyword, tab);
+      fetchRecipes(searchKeyword, tab, searchClicked);
     }
   };
 
@@ -166,7 +175,7 @@ const Explore = () => {
                 onClick={() => {
                   setSearchKeyword(keyword);
                   setSearchClicked(true);
-                  fetchRecipes(keyword, activeTab);
+                  fetchRecipes(keyword, activeTab, true);
                 }}
                 key={index}
                 className="search-history-item"
