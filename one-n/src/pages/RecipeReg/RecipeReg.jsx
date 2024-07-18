@@ -102,7 +102,7 @@ function RecipeReg() {
             </div>
           </div>
         </ReactModal>
-        레시피 게시글 작성
+        <text> 레시피 게시글 작성</text>
       </div>
 
       <div className="reg-body">
@@ -154,10 +154,9 @@ function RecipeReg() {
           {" "}
           요리 과정{" "}
         </div>
-        <PlusStep />
 
-        {[...Array(StepCount)].map((_, index) => (
-          <PlusStep key={index} />
+        {[...Array(StepCount+1)].map((_, index) => (
+          <PlusStep key={index} index={index} />
         ))}
 
         <button className="plus-btn" onClick={addStep}>

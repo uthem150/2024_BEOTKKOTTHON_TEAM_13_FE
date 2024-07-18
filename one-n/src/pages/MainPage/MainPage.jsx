@@ -185,7 +185,7 @@ function MainPage() {
           <img src={plus} className='plus' onClick={toggleDropup} />
           {dropdownVisible && (
             <div className='dropup'>
-              <Link to='/recipeReg' className='link-style'><img src={chef} alt='chef' /> 레시피 </Link>
+              <Link to='/recipeRegister' className='link-style'><img src={chef} alt='chef' /> 레시피 </Link>
               <Link to='/product-post' className='link-style' style={{ marginTop: '8px' }}><img src={cart} alt='cart' /> 공동구매 </Link>
             </div>
           )}
