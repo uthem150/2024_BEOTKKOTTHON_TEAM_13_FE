@@ -46,18 +46,15 @@ function MainPage() {
     setDropdownVisible(!dropdownVisible);
   };
 
-
-
-
   useEffect(() => {
-    // API 엔드포인트 URL 설정
+    // 간단 레시피 리스트 API 엔드포인트
     const apiUrl = `${baseUrl}/recipe/brief`;
 
     axios.get(apiUrl)
       .then((response) => {
-        const updatedData = response.data.map(item => ({
+        const updatedData = response.data.map((item) => ({
           ...item,
-          thumbnail_image: `${baseUrl}/recipe/brief/${item.thumbnail_image}`
+          thumbnail_image: `https://n1.junyeong.dev/${item.thumbnail_image}`
         }));
         setData(updatedData);
       })
@@ -132,7 +129,8 @@ function MainPage() {
 
   // fetchProducts 함수 정의
   const fetchProducts = (bCode) => {
-    const url = `${baseUrl}/post/list?type=all&bcode=${bCode}&keyword=&page=${page}`;
+    const url = `${baseUrl}/post/list?type=all&bcode=&keyword=&page=${page}`;
+    // const url = `${baseUrl}/post/list?type=all&bcode=${bCode}&keyword=&page=${page}`;
     console.log(url);
     fetch(url)
       .then((res) => res.json())

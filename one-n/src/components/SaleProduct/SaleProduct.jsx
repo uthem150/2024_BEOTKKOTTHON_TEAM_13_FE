@@ -8,6 +8,7 @@ import CurPeople from '../../assets/curpeople.png'
 
 export default function SaleProduct({ product }) {
     const navigate = useNavigate();
+    const imageUrl="https://n1.junyeong.dev";
 
     const [picked, setPicked] = useState(false);
     const [daysLeft, setDaysLeft] = useState(0);
@@ -51,7 +52,7 @@ export default function SaleProduct({ product }) {
     return (
         <div className="sale-product" onClick={handleProductClick}>
             <div className="product-details">
-                <img src={product.image} alt="Product" className="product-image" />
+                <img src={`${imageUrl}${product.image}`} alt="Product" className="product-image" />
                 <div className="sale-product-details">
                     <div className="sale-product-title-container">
                         <div className="date-people">
