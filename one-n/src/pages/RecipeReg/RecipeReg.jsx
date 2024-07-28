@@ -35,30 +35,59 @@ function RecipeReg() {
 
   // 재료 추가
   const [GrdCount, setGrdCount] = useState(0);
-
-  const addGrd = () => {
-    setGrdCount((prevCount) => prevCount + 1);
+  const [ingredients, setIngredients] = useState([]);
+  const addIngredient = (ingredient) => {
+    setIngredients((prevIngredients) => [...prevIngredients, ingredient]);
   };
 
   // 과정 추가
   const [StepCount, setStepCount] = useState(0);
+  const [processes, setProcesses] = useState([]);
+  const addProcess = (process) => {
+    setProcesses((prevProcesses) => [...prevProcesses, process]);
+  };
 
-  const addStep = () => {
-    setStepCount((prevCount) => prevCount + 1);
+  // 레시피 등록 함수
+  const registerRecipe = () => {
+    const recipeData = {
+      userId: signinData.userId, // 사용자 ID
+      thumbnailImage: URL.createObjectURL(image),
+      title: document.querySelector('.input-title').value.trim(),
+      ingredients: ingredients, // 재료 목록
+      processes: processes, // 과정 목록
+    };
+
+    // 실제로 API에 POST 요청 보내는 부분
+    fetch(`${baseUrl}/recipe`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(recipeData),
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('네트워크 응답 오류');
+      })
+      .then(data => {
+        console.log('레시피 등록 성공:', data);
+        setSaveModalOpen(true);
+      })
+      .catch(error => {
+        console.error('레시피 등록 오류:', error);
+      });
   };
 
   // 모달 알림창
-  const [exitModalOpen, setExitModalOpen] = useState(false); // 퇴장
   const [saveModalOpen, setSaveModalOpen] = useState(false); // 저장
-  const [closeModalOpen, setCloseModalOpen] = useState(false); // 닫기
+  const [closeModalOpen, setCloseModalOpen] = useState(false); // 작성취소 나가기
 
-  const onClickExit = () => {
-    setExitModalOpen(false);
+  const onClickSave = () => {
+    registerRecipe();
   };
-  const onClicksave = () => {
-    setExitModalOpen(false);
-  };
-  const onClickclose = () => {
+  const onClickClose = () => {
     setCloseModalOpen(false);
   };
 
@@ -95,14 +124,14 @@ function RecipeReg() {
                 {" "}
                 취소하기{" "}
               </button>
-              <button onClick={onClickclose} style={CloseModalStyles.button}>
+              <button onClick={onClickClose} style={CloseModalStyles.button}>
                 {" "}
                 계속하기{" "}
               </button>
             </div>
           </div>
         </ReactModal>
-        레시피 게시글 작성
+        <text> 레시피 게시글 작성</text>
       </div>
 
       <div className="reg-body">
@@ -137,15 +166,13 @@ function RecipeReg() {
           {" "}
           필요 재료{" "}
         </div>
-        <PlusGrd />
-        <PlusGrd />
-        <PlusGrd />
 
-        {[...Array(GrdCount)].map((_, index) => (
-          <PlusGrd key={index} />
+        {/* 재료 추가 컴포넌트 */}
+        {[...Array(GrdCount+3)].map((_, index) => (
+          <PlusGrd key={index} addIngredient={addIngredient} />
         ))}
 
-        <button className="plus-btn" onClick={addGrd}>
+        <button className="plus-btn" onClick={() => setGrdCount(prevCount => prevCount + 1)}>
           {" "}
           재료 추가{" "}
         </button>
@@ -154,30 +181,31 @@ function RecipeReg() {
           {" "}
           요리 과정{" "}
         </div>
-        <PlusStep />
 
-        {[...Array(StepCount)].map((_, index) => (
-          <PlusStep key={index} />
+        {/* 과정 추가 컴포넌트 */}
+        {[...Array(StepCount + 1)].map((_, index) => (
+          <PlusStep key={index} index={index} addProcess={addProcess} />
         ))}
 
-        <button className="plus-btn" onClick={addStep}>
+        <button className="plus-btn" onClick={() => setStepCount(prevCount => prevCount + 1)}>
           {" "}
           과정 추가{" "}
         </button>
 
-        <button className="upload-btn" onClick={() => setExitModalOpen(true)}>
+        <button className="upload-btn" onClick={onClickSave}>
           {" "}
           등록하기{" "}
         </button>
+
         <ReactModal
-          isOpen={exitModalOpen}
-          style={ExitModalStyles}
-          contentLabel="Exit Modal"
+          isOpen={saveModalOpen}
+          style={SaveModalStyles}
+          contentLabel="Save Modal"
         >
-          <div className="exitModal">
+          <div className="saveModal">
             <img src={save} alt="save" />
             <h3> 성공적으로 등록되었어요!</h3>
-            <button onClick={onClickExit} style={ExitModalStyles.button}>
+            <button onClick={() => setSaveModalOpen(false)} style={SaveModalStyles.button}>
               {" "}
               확인{" "}
             </button>
@@ -221,7 +249,7 @@ const CloseModalStyles = {
   },
 };
 
-const ExitModalStyles = {
+const SaveModalStyles = {
   overlay: {
     backgroundColor: " rgba(0, 0, 0, 0.3)",
   },
