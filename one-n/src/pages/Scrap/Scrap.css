@@ -145,6 +145,11 @@ div {
   cursor: pointer; /* 마우스 커서 변경 */
 }
 
+/* active 상태일 때, hover해도 색상 그대로 */
+.option-buttons button.active:hover {
+  background-color: #ffdc25; /* 배경 색상 변경 없음 */
+}
+
 .wishlist-buttons {
   display: inline-flex;
   align-items: center;

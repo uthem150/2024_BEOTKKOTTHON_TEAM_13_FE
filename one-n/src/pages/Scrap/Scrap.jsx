@@ -13,7 +13,7 @@ export default function Scrap() {
   const [satisfaction, setSatisfaction] = useState(null); // 만족도
   const [nickname, setNickname] = useState(null);
   const [products, setProducts] = useState([]);
-
+  // console.log(products);
   const [data, setData] = useState([]); // 작성한 레시피 데이터
 
   // 메인 > 찜 탭
@@ -234,9 +234,7 @@ export default function Scrap() {
       </div>
       <div className="scrap-scroll">
         {selectedOption === "ingredients" &&
-          products.map((product, index) => (
-            <SaleProduct key={index} product={product} />
-          ))}
+          products.map((item) => <SaleProduct key={item.id} product={item} />)}
 
         {selectedOption === "recipe" && (
           <Masonry

@@ -73,6 +73,30 @@
 .search-btn {
   cursor: pointer;
 }
+
+.scrap-option-container {
+  margin-top: 49px;
+  margin-left: 16px;
+  margin-right: 16px;
+  display: flex;
+  height: 45px;
+  padding: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 16px;
+  background: var(--grey-95, #f2f2f2);
+}
+
+.option-buttons button {
+  transition: background-color 0.3s, color 0.3s; /* 전환 부드럽게 */
+  cursor: pointer; /* 마우스 커서 변경 */
+}
+
+.option-buttons button:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* 호버 시 배경 색상 변경 */
+}
+
 .tabs-container {
   display: flex;
   align-items: center;
@@ -82,18 +106,29 @@
 
 .tabs {
   display: flex;
-  gap: 10px;
+  gap: 0px;
   width: 100%;
   margin: 0 16px;
-  border: 1px solid lightgray;
+  padding: 5px;
   border-radius: 8px;
   justify-content: center;
+  background: var(--grey-95, #f2f2f2);
 }
 
 .tab {
-  border: 1px solid gray;
-  padding: 7px;
-  margin: 5px;
-  cursor: pointer;
+  /* border: 1px solid gray; */
+  padding: 10px;
   border-radius: 5px;
+  width: 100%;
+  gap: 0;
+  text-align: center;
+
+  background: var(--grey-95, #f2f2f2);
+
+  transition: background-color 0.3s, color 0.3s; /* 전환 부드럽게 */
+  cursor: pointer; /* 마우스 커서 변경 */
+}
+
+.tab:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* 호버 시 배경 색상 변경 */
 }
