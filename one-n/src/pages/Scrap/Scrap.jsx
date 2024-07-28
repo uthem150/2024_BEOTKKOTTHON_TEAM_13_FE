@@ -40,6 +40,11 @@ export default function Scrap() {
     navigate(-1);
   };
 
+  // edit 버튼 누르면, edit 페이지로 이동
+  const handleEditClick = () => {
+    navigate("/edit-profile");
+  };
+
   //클릭된 버튼의 옵션을 나타내는 인자 받음
   const handleButtonClick = (option) => {
     // setSelectedWishlistButton(null); //찜 버튼의 선택 상태 초기화
@@ -183,17 +188,13 @@ export default function Scrap() {
         </button>
       </div>
       <div className="scrap-profile-container">
-        <div className="scrap-profile-image">
-          <button className="profile-modify-button">
-            <img src={Modify} alt="Modify"></img>
-          </button>
-        </div>
+        <div className="scrap-profile-image"></div>
         <div className="scrap-profile-name-satisfaction-container">
           <div className="scrap-profile-name">{nickname}</div>
 
           <div className="my-satisfaction-container">
             <span className="my-satisfaction-num">
-              만족도{" "}
+              만족도
               {satisfaction !== null ? satisfaction + "%" : "불러오는 중..."}
             </span>
             <div className="my-satisfaction-bar">
@@ -204,6 +205,10 @@ export default function Scrap() {
             </div>
           </div>
         </div>
+        {/* edit 버튼 */}
+        <button className="profile-modify-button" onClick={handleEditClick}>
+          <img src={Modify} alt="Modify"></img>
+        </button>
       </div>
       <div className="scrap-option-container">
         <div className="option-buttons">

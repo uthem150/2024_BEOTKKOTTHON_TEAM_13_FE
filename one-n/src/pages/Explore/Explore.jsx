@@ -142,31 +142,33 @@ const Explore = () => {
       </div>
 
       {searchClicked && (
-        <div className="tabs">
-          <div
-            style={{
-              backgroundColor: activeTab === "ingd" ? "yellow" : "white",
-            }}
-            className="tab"
-            onClick={() => handleTabClick("ingd")}
-          >
-            재료
-          </div>
-          <div
-            style={{
-              backgroundColor: activeTab === "r_ingd" ? "yellow" : "white",
-            }}
-            className="tab"
-            onClick={() => handleTabClick("r_ingd")}
-          >
-            레시피
+        <div className="tabs-container">
+          <div className="tabs">
+            <div
+              style={{
+                backgroundColor: activeTab === "ingd" ? "#ffdc25" : "white",
+              }}
+              className="tab"
+              onClick={() => handleTabClick("ingd")}
+            >
+              재료
+            </div>
+            <div
+              style={{
+                backgroundColor: activeTab === "r_ingd" ? "#ffdc25" : "white",
+              }}
+              className="tab"
+              onClick={() => handleTabClick("r_ingd")}
+            >
+              레시피
+            </div>
           </div>
         </div>
       )}
 
       {!searchClicked && searchHistory && searchHistory.length > 0 && (
         <div>
-          <div style={{ fontSize: "15px", margin: "15px 15px" }}>
+          <div style={{ fontSize: "15px", margin: "25px 15px" }}>
             <strong>최근 검색어</strong>
           </div>
           <div className="search-history">
