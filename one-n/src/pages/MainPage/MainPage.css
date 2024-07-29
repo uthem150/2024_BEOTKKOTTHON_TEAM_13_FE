@@ -123,7 +123,7 @@
 
 .photoStyle {
   position: relative;
-  bottom: 54px;
+  bottom: 36px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
