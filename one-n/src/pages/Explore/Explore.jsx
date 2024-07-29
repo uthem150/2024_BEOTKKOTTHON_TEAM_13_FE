@@ -210,15 +210,11 @@ const Explore = () => {
           </div>
         </div>
       )}
-      {data.map((item) => (
+      {/* {data.map((item) => (
         <SaleProduct key={item.id} product={item} />
-      ))}
-
-      {/* {data.map((product, index) => (
-        <SaleProduct key={index} product={product} />
       ))} */}
 
-      {/* <Masonry
+      <Masonry
         breakpointCols={2}
         className="grid-container"
         columnClassName="column"
@@ -232,7 +228,7 @@ const Explore = () => {
             />
           </div>
         ))}
-      </Masonry> */}
+      </Masonry>
     </>
   );
 };
