@@ -8,6 +8,7 @@ import CurPeople from "../../assets/curpeople.png";
 
 export default function SaleProduct({ product }) {
   const navigate = useNavigate();
+  const imageUrl = "https://n1.junyeong.dev"; // imageUrl 추가
 
   const [picked, setPicked] = useState(false);
   const [daysLeft, setDaysLeft] = useState(0);
