@@ -4,7 +4,6 @@ import axios from "axios";
 import "./Explore.css";
 import search from "../../assets/icons/search.svg";
 import Masonry from "https://cdn.skypack.dev/react-masonry-css@1.0.16";
-import SaleProduct from "../../components/SaleProduct/SaleProduct";
 
 const Explore = () => {
   const baseUrl = "https://n1.junyeong.dev/api";
@@ -210,15 +209,8 @@ const Explore = () => {
           </div>
         </div>
       )}
-      {data.map((item) => (
-        <SaleProduct key={item.id} product={item} />
-      ))}
 
-      {/* {data.map((product, index) => (
-        <SaleProduct key={index} product={product} />
-      ))} */}
-
-      {/* <Masonry
+      <Masonry
         breakpointCols={2}
         className="grid-container"
         columnClassName="column"
@@ -232,7 +224,7 @@ const Explore = () => {
             />
           </div>
         ))}
-      </Masonry> */}
+      </Masonry>
     </>
   );
 };

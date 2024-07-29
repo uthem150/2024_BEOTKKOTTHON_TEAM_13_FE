@@ -1,0 +1,52 @@
+.scrap-back-button-container {
+  margin-left: 16px;
+  margin-top: 24px;
+  margin-bottom: 25px;
+  display: flex;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scrap-back-button {
+  border: none;
+  background-color: transparent;
+}
+
+.scrap-profile-image {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--grey-85, #d9d9d9);
+  position: relative;
+}
+
+.profile-image-container {
+  display: flex;
+  margin-bottom: 40px;
+}
+
+.save-button {
+  margin-top: 20px;
+  width: 70%;
+  padding: 10px;
+  font-size: 14px;
+  color: black;
+  background-color: #ffdc25;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form-input {
+  margin-left: 10px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
