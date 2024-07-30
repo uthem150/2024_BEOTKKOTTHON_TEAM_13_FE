@@ -185,6 +185,12 @@ div {
   color: #fff; /* 텍스트 색상을 흰색으로 설정 */
 }
 
+.scrap-scroll-container {
+  display: flex;
+  justify-content: center;
+}
+
 .scrap-scroll {
   margin-bottom: 80px;
+  width: 95%;
 }
