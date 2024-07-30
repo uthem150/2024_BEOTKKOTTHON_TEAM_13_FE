@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function Scrap() {
   const baseUrl = "https://n1.junyeong.dev/api";
+  const imgUrl = "https://n1.junyeong.dev";
+
   const [signinData, setSigninData] = useState(null); // 유저 데이터
   const [satisfaction, setSatisfaction] = useState(null); // 만족도
   const [nickname, setNickname] = useState(null);
@@ -99,30 +101,23 @@ export default function Scrap() {
   // 자신이 작성한 레시피 리스트
   const fetchPostRecipe = async () => {
     // const apiUrl = `${baseUrl}/user/recipes?session_id=test_${signinData}`;
-    const apiUrl = `${baseUrl}/user/recipes?session_id=test_test_session_id`;
+    const apiUrl = `${baseUrl}/user/recipes?session_id=test_session_id`;
 
     axios
       .get(apiUrl)
       .then((response) => {
         const updatedData = response.data.map((item) => ({
           ...item,
-          thumbnail_image: `${baseUrl}${item.thumbnail_image}`,
+          thumbnail_image: `${imgUrl}${item.thumbnail_image}`,
         }));
         setData(updatedData); // 작성한 레시피 데이터
+        console.log(apiUrl);
+        console.log(updatedData);
       })
       .catch((error) => {
         console.error("API 요청 에러:", error);
       });
   };
-
-  // const fetchLikedRecipe = async () => {
-  //     try {
-  //         const response = await axios.get('${baseUrl}/user/likes?session_id=test_session_id&type=recipe');
-  //         setLikedRecipe(response.data);
-  //     } catch (error) {
-  //         console.error('Error fetching liked posts:', error);
-  //     }
-  // };
 
   // 메인 탭에서 찜 탭 누를 때
   const handleWishlistButtonClick = (action) => {
@@ -146,6 +141,15 @@ export default function Scrap() {
     }
   };
 
+  // const fetchLikedRecipe = async () => {
+  //     try {
+  //         const response = await axios.get('${baseUrl}/user/likes?session_id=test_session_id&type=recipe');
+  //         setLikedRecipe(response.data);
+  //     } catch (error) {
+  //         console.error('Error fetching liked posts:', error);
+  //     }
+  // };
+
   // 찜 탭 안에서, 좋아요한 레시피 불러오는 함수
   const fetchLikedRecipe = async () => {
     // const apiUrl = `${baseUrl}/user/likes?session_id=${signinData}&type=recipe`;
@@ -156,7 +160,7 @@ export default function Scrap() {
       .then((response) => {
         const updatedData = response.data.map((item) => ({
           ...item,
-          thumbnail_image: `${baseUrl}${item.thumbnail_image}`,
+          thumbnail_image: `${imgUrl}${item.thumbnail_image}`,
         }));
         console.log("요청감");
         console.log(updatedData);
@@ -232,65 +236,69 @@ export default function Scrap() {
           </button>
         </div>
       </div>
-      <div className="scrap-scroll">
-        {selectedOption === "ingredients" &&
-          products.map((item) => <SaleProduct key={item.id} product={item} />)}
-
-        {selectedOption === "recipe" && (
-          <Masonry
-            breakpointCols={2}
-            className="grid-container"
-            columnClassName="column"
-          >
-            {data.map((item) => (
-              <div key={item.id} className="grid-item">
-                <img src={item.thumbnail_image} alt={`Image ${item.title}`} />
-              </div>
+      <div className="scrap-scroll-container">
+        <div className="scrap-scroll">
+          {selectedOption === "ingredients" &&
+            products.map((item) => (
+              <SaleProduct key={item.id} product={item} />
             ))}
-          </Masonry>
-        )}
 
-        {selectedOption === "wishlist" && (
-          <div className="wishlist-buttons">
-            <button
-              className={
-                selectedWishlistButton === "글"
-                  ? "wishlist-button active"
-                  : "wishlist-button"
-              }
-              onClick={() => handleWishlistButtonClick("글")}
+          {selectedOption === "recipe" && (
+            <Masonry
+              breakpointCols={2}
+              className="grid-container"
+              columnClassName="column"
             >
-              글
-            </button>
-            <button
-              className={
-                selectedWishlistButton === "레시피"
-                  ? "wishlist-button active"
-                  : "wishlist-button"
-              }
-              onClick={() => handleWishlistButtonClick("레시피")}
-            >
-              레시피
-            </button>
-          </div>
-        )}
-        {selectedWishlistButton === "글" &&
-          pickProducts.map((product, index) => (
-            <SaleProduct key={index} product={product} />
-          ))}
-        {selectedWishlistButton === "레시피" && (
-          <Masonry
-            breakpointCols={2}
-            className="grid-container"
-            columnClassName="column"
-          >
-            {likedRecipe.map((item) => (
-              <div key={item.id} className="grid-item">
-                <img src={item.thumbnail_image} alt={`Image ${item.title}`} />
-              </div>
+              {data.map((item) => (
+                <div key={item.id} className="grid-item">
+                  <img src={item.thumbnail_image} alt={`Image ${item.title}`} />
+                </div>
+              ))}
+            </Masonry>
+          )}
+
+          {selectedOption === "wishlist" && (
+            <div className="wishlist-buttons">
+              <button
+                className={
+                  selectedWishlistButton === "글"
+                    ? "wishlist-button active"
+                    : "wishlist-button"
+                }
+                onClick={() => handleWishlistButtonClick("글")}
+              >
+                글
+              </button>
+              <button
+                className={
+                  selectedWishlistButton === "레시피"
+                    ? "wishlist-button active"
+                    : "wishlist-button"
+                }
+                onClick={() => handleWishlistButtonClick("레시피")}
+              >
+                레시피
+              </button>
+            </div>
+          )}
+          {selectedWishlistButton === "글" &&
+            pickProducts.map((product, index) => (
+              <SaleProduct key={index} product={product} />
             ))}
-          </Masonry>
-        )}
+          {selectedWishlistButton === "레시피" && (
+            <Masonry
+              breakpointCols={2}
+              className="grid-container"
+              columnClassName="column"
+            >
+              {likedRecipe.map((item) => (
+                <div key={item.id} className="grid-item">
+                  <img src={item.thumbnail_image} alt={`Image ${item.title}`} />
+                </div>
+              ))}
+            </Masonry>
+          )}
+        </div>
       </div>
     </div>
   );
