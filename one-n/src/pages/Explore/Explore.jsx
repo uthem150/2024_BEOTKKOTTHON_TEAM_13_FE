@@ -16,7 +16,7 @@ const Explore = () => {
   const [signinData, setSigninData] = useState(null); // 로그인 데이터 저장
   const [searchHistory, setSearchHistory] = useState([]); // 로컬 스토리지에 저장된 목록
   const [searchClicked, setSearchClicked] = useState(false); // 검색버튼이 눌렸는지 확인
-  const [activeTab, setActiveTab] = useState("ingd"); // 현재 활성화된 탭
+  const [activeTab, setActiveTab] = useState("all"); // 현재 활성화된 탭
 
   useEffect(() => {
     // sessionStorage에 저장된 로그인 데이터
@@ -30,6 +30,9 @@ const Explore = () => {
     if (storedSearchHistory) {
       setSearchHistory(JSON.parse(storedSearchHistory));
     }
+
+    // 처음에 모든 레시피 가져오기
+    fetchRecipes("", false);
   }, []);
 
   // 사진 클릭하면 /recipe/{id} 경로로 이동
@@ -40,6 +43,7 @@ const Explore = () => {
   // 검색입력 변경될 때 마다 업데이트
   const handleSearchInputChange = (e) => {
     setSearchKeyword(e.target.value);
+    setSearchClicked(false); // 검색어 입력 중에는 검색 기록을 보여줌
   };
 
   const handleSearch = () => {
@@ -58,29 +62,29 @@ const Explore = () => {
     // localStorage에 검색 기록 저장
     localStorage.setItem("searchHistory", JSON.stringify(updatedSearchHistory));
 
-    setSearchClicked(true);
-    fetchRecipes(searchKeyword, activeTab, true);
+    fetchRecipes(searchKeyword, true);
+    setSearchClicked(false); // 검색 실행 후에는 검색 기록을 숨김
   };
 
-  //사용자가 검색버튼 클릭했는지 여부
-  const fetchRecipes = (keyword, tab, isSearchClicked) => {
+  const fetchRecipes = (keyword, isSearchClicked) => {
     setData([]); // 이전 페치 데이터 삭제
 
     const apiUrl = isSearchClicked
-      ? `${baseUrl}/post/list?bcode=&type=${tab}&keyword=${keyword}&page=1` // 검색 버튼을 누른 후 받아올 주소
-      : `${baseUrl}/post/list?bcode=&type=all&keyword=${keyword}&page=1`; // 처음 검색할 때 받아올 주소
+      ? `${baseUrl}/recipe/list?&keyword=${keyword}&page=1`
+      : `${baseUrl}/recipe/list?keyword=&page=1`;
 
     console.log(apiUrl);
 
     axios
       .get(apiUrl)
       .then((response) => {
+        console.log(response);
         const updatedData = response.data.map((item) => ({
           ...item,
-          thumbnail_image: `${imgBaseUrl}${item.image}`,
+          thumbnail_image: `${imgBaseUrl}${item.thumbnail_image}`,
         }));
         setData(updatedData); // 받아온 데이터 저장
-        console.log(updatedData);
+        // console.log(updatedData);
       })
       .catch((error) => {
         console.error("API 요청 에러:", error);
@@ -98,21 +102,6 @@ const Explore = () => {
     localStorage.setItem("searchHistory", JSON.stringify(updatedSearchHistory));
   };
 
-  //검색버튼 누르기 전
-  useEffect(() => {
-    //searchClicked가 false일 때만 fetchRecipes 함수 호출
-    if (searchKeyword.trim() !== "" && !searchClicked) {
-      fetchRecipes(searchKeyword, activeTab, false);
-    }
-  }, [searchKeyword]);
-
-  //검색버튼 누른 후
-  useEffect(() => {
-    if (searchKeyword.trim() !== "" && searchClicked) {
-      fetchRecipes(searchKeyword, activeTab, true);
-    }
-  }, [activeTab]);
-
   const handleTabClick = (tab) => {
     setActiveTab(tab);
 
@@ -120,8 +109,12 @@ const Explore = () => {
     setData([]);
 
     if (searchKeyword.trim() !== "") {
-      fetchRecipes(searchKeyword, tab, searchClicked);
+      fetchRecipes(searchKeyword, true);
     }
+  };
+
+  const handleInputFocus = () => {
+    setSearchClicked(true);
   };
 
   return (
@@ -131,6 +124,7 @@ const Explore = () => {
           type="text"
           value={searchKeyword}
           onChange={handleSearchInputChange}
+          onFocus={handleInputFocus}
           placeholder="검색어를 입력하세요"
           className="search"
         />
@@ -142,32 +136,7 @@ const Explore = () => {
         />
       </div>
 
-      {searchClicked && (
-        <div className="tabs-container">
-          <div className="tabs">
-            <div
-              style={{
-                backgroundColor: activeTab === "ingd" ? "#ffdc25" : "",
-              }}
-              className="tab"
-              onClick={() => handleTabClick("ingd")}
-            >
-              재료
-            </div>
-            <div
-              style={{
-                backgroundColor: activeTab === "r_ingd" ? "#ffdc25" : "",
-              }}
-              className="tab"
-              onClick={() => handleTabClick("r_ingd")}
-            >
-              레시피
-            </div>
-          </div>
-        </div>
-      )}
-
-      {!searchClicked && searchHistory && searchHistory.length > 0 && (
+      {searchClicked && searchHistory && searchHistory.length > 0 && (
         <div>
           <div style={{ fontSize: "15px", margin: "25px 15px" }}>
             <strong>최근 검색어</strong>
@@ -177,8 +146,8 @@ const Explore = () => {
               <div
                 onClick={() => {
                   setSearchKeyword(keyword);
-                  setSearchClicked(true);
-                  fetchRecipes(keyword, activeTab, true);
+                  fetchRecipes(keyword, true);
+                  setSearchClicked(false); // 최근 검색어 클릭 시 검색 기록 숨김
                 }}
                 key={index}
                 className="search-history-item"
@@ -210,9 +179,6 @@ const Explore = () => {
           </div>
         </div>
       )}
-      {/* {data.map((item) => (
-        <SaleProduct key={item.id} product={item} />
-      ))} */}
 
       <Masonry
         breakpointCols={2}
