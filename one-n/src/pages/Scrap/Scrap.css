@@ -103,11 +103,11 @@ div {
 }
 
 .scrap-option-container {
-  margin-top: 49px;
+  margin-top: 30px;
   margin-left: 16px;
   margin-right: 16px;
   display: flex;
-  height: 45px;
+  height: 40px;
   padding: 4px;
   display: flex;
   justify-content: space-between;

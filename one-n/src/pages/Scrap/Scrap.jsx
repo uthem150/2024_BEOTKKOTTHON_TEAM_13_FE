@@ -14,7 +14,7 @@ export default function Scrap() {
   const [signinData, setSigninData] = useState(null); // 유저 데이터
   const [satisfaction, setSatisfaction] = useState(null); // 만족도
   const [nickname, setNickname] = useState(null);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]); // 사용자가 작성한 게시글
   // console.log(products);
   const [data, setData] = useState([]); // 작성한 레시피 데이터
 
@@ -155,20 +155,16 @@ export default function Scrap() {
     // const apiUrl = `${baseUrl}/user/likes?session_id=${signinData}&type=recipe`;
     const apiUrl = `${baseUrl}/user/likes?session_id=test_session_id&type=recipe`;
 
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        const updatedData = response.data.map((item) => ({
-          ...item,
-          thumbnail_image: `${imgUrl}${item.thumbnail_image}`,
-        }));
-        console.log("요청감");
-        console.log(updatedData);
-        setLikedRecipe(updatedData);
-      })
-      .catch((error) => {
-        console.error("API 요청 에러:", error);
-      });
+    try {
+      const response = await axios.get(apiUrl);
+      const updatedData = response.data.map((item) => ({
+        ...item,
+        thumbnail_image: `${imgUrl}${item.thumbnail_image}`,
+      }));
+      setLikedRecipe(updatedData);
+    } catch (error) {
+      console.error("API 요청 에러:", error);
+    }
   };
 
   // 찜 탭 안에 들어갈 옵션
@@ -238,11 +234,13 @@ export default function Scrap() {
       </div>
       <div className="scrap-scroll-container">
         <div className="scrap-scroll">
+          {/* 작성한 재료 글 목록 */}
           {selectedOption === "ingredients" &&
             products.map((item) => (
               <SaleProduct key={item.id} product={item} />
             ))}
 
+          {/* 작성한 레시피 목록 */}
           {selectedOption === "recipe" && (
             <Masonry
               breakpointCols={2}
@@ -257,6 +255,7 @@ export default function Scrap() {
             </Masonry>
           )}
 
+          {/* 찜한 목록 (재료, 레시피) */}
           {selectedOption === "wishlist" && (
             <div className="wishlist-buttons">
               <button
@@ -281,23 +280,28 @@ export default function Scrap() {
               </button>
             </div>
           )}
-          {selectedWishlistButton === "글" &&
+          {selectedOption === "wishlist" &&
+            selectedWishlistButton === "글" &&
             pickProducts.map((product, index) => (
               <SaleProduct key={index} product={product} />
             ))}
-          {selectedWishlistButton === "레시피" && (
-            <Masonry
-              breakpointCols={2}
-              className="grid-container"
-              columnClassName="column"
-            >
-              {likedRecipe.map((item) => (
-                <div key={item.id} className="grid-item">
-                  <img src={item.thumbnail_image} alt={`Image ${item.title}`} />
-                </div>
-              ))}
-            </Masonry>
-          )}
+          {selectedOption === "wishlist" &&
+            selectedWishlistButton === "레시피" && (
+              <Masonry
+                breakpointCols={2}
+                className="grid-container"
+                columnClassName="column"
+              >
+                {likedRecipe.map((item) => (
+                  <div key={item.id} className="grid-item">
+                    <img
+                      src={item.thumbnail_image}
+                      alt={`Image ${item.title}`}
+                    />
+                  </div>
+                ))}
+              </Masonry>
+            )}
         </div>
       </div>
     </div>
