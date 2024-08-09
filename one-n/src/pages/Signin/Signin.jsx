@@ -16,6 +16,10 @@ function Signin() {
         navigate(-1);
     };
 
+    const toSignup = () => {
+        navigate("/signup");
+    }
+
     return (
         <div className='signinpage-container'>
 
@@ -39,7 +43,7 @@ function Signin() {
             <button className="signin-btn">이메일로 로그인</button>
 
             <div className="signup-search">
-                <div className="signup-name">회원가입</div>
+                <div className="signup-name" onClick={toSignup}>회원가입</div>
                 <div className="search-name">아이디/비밀번호 찾기</div>
             </div>
 

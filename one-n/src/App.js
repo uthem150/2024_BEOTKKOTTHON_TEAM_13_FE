@@ -19,6 +19,7 @@ import RecipeDetail from "./pages/RecipeDetail/RecipeDetail";
 import RecipeReg from "./pages/RecipeReg/RecipeReg";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import Signin from "./pages/Signin/Signin";
+import Signup from "./pages/Signup/Signup";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             <Route path="/recipe/:recipeId" element={<RecipeDetail />} />
             <Route path="/recipeRegister" element={<RecipeReg />} />
             <Route path="/signin" element={<Signin />} />
+            <Route path="/signup" element={<Signup />} />
           </Routes>
         </div>
       </MyContextProvider>
@@ -54,7 +56,7 @@ function App() {
 
 function ConditionalNavBar() {
   const location = useLocation();
-  const noNavBarRoutes = ["/signin"]; // Navbar를 표시하지 않을 경로
+  const noNavBarRoutes = ["/signin", "/signup"]; // Navbar를 표시하지 않을 경로
 
   return !noNavBarRoutes.includes(location.pathname) ? <NavBar /> : null;
 }
