@@ -34,7 +34,8 @@ function App() {
             <Route path="/select-location" element={<SelectLocation />} />
             <Route path="/product-post" element={<ProductPost />} />
             <Route path="/scrap" element={<Scrap />} />
-            <Route path="/" element={<MainPage />} />
+            <Route path="/" element={<Signin />} />
+            <Route path="/home" element={<MainPage />} />
             <Route path="/chat" element={<ChatList />} />
             <Route path='/explore' element={<Explore />} />
             <Route path='/search' element={<SearchPage />} />
@@ -44,7 +45,6 @@ function App() {
             <Route path="/explore" element={<Explore />} />
             <Route path="/recipe/:recipeId" element={<RecipeDetail />} />
             <Route path="/recipeRegister" element={<RecipeReg />} />
-            <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
           </Routes>
         </div>

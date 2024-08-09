@@ -1,28 +1,47 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from 'react-router-dom';
-import './Signin.css'
-import { ReactComponent as Back } from '../../assets/back.svg'
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import './Signin.css';
+import { ReactComponent as Back } from '../../assets/back.svg';
 import logo from '../../assets/logo/logo.png';
 import { ReactComponent as GoogleIcon } from '../../assets/social/GoogleIcon.svg';
 import { ReactComponent as KakaoIcon } from '../../assets/social/KakaoIcon.svg';
 import { ReactComponent as NaverIcon } from '../../assets/social/NaverIcon.svg';
+import axios from 'axios';
 
 function Signin() {
-
     const baseUrl = "https://n1.junyeong.dev/api";
     const navigate = useNavigate();
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleBackClick = () => {
         navigate(-1);
     };
 
+    const handleSignin = async () => {
+        if (email && password) {
+            try {
+                const response = await axios.post(`${baseUrl}/user/signin`, {
+                    email,
+                    password
+                });
+                console.log('로그인 요청 성공:', response.data);
+                navigate("/"); // 홈으로 이동
+            } catch (error) {
+                console.error('로그인 오류:', error.response ? error.response.data : error.message);
+            }
+        } else {
+            console.log('이메일과 비밀번호를 입력해주세요.');
+        }
+    };
+
     const toSignup = () => {
         navigate("/signup");
-    }
+    };
 
     return (
         <div className='signinpage-container'>
-
             <button className='back-button' onClick={handleBackClick}>
                 <Back />
             </button>
@@ -36,11 +55,23 @@ function Signin() {
             </div>
 
             <div className="signin-input">
-                <input type="text" className="input-field" placeholder="이메일을 입력해주세요." />
-                <input type="password" className="input-field" placeholder="비밀번호를 입력해주세요." />
+                <input
+                    type="text"
+                    className="input-field"
+                    placeholder="이메일을 입력해주세요."
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                    type="password"
+                    className="input-field"
+                    placeholder="비밀번호를 입력해주세요."
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
             </div>
 
-            <button className="signin-btn">이메일로 로그인</button>
+            <button className="signin-btn" onClick={handleSignin}>이메일로 로그인</button>
 
             <div className="signup-search">
                 <div className="signup-name" onClick={toSignup}>회원가입</div>
@@ -58,10 +89,8 @@ function Signin() {
                 <KakaoIcon />
                 <NaverIcon />
             </div>
-
         </div>
-    )
-
+    );
 }
 
 export default Signin;
