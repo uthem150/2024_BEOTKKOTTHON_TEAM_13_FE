@@ -4,19 +4,36 @@ import axios from "axios";
 import "./Explore.css";
 import search from "../../assets/icons/search.svg";
 import Masonry from "https://cdn.skypack.dev/react-masonry-css@1.0.16";
-import SaleProduct from "../../components/SaleProduct/SaleProduct";
 import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import styled from "styled-components";
+import { HeartOutlined, HeartFilled } from "@ant-design/icons";
 
 //Card 컴포넌트 확장하여 커스터마이징
 const CustomCard = styled(Card)`
-  margin-top: 5px;
+  /* margin: 10px 4px; */
+  margin: 3px;
+  margin-top: 10px;
+  position: relative;
   .ant-card-body {
     padding: 15px;
   }
+
   .ant-card-meta-title {
     font-size: 0.7rem;
+  }
+`;
+
+// 하트 아이콘 스타일링
+const LikeIcon = styled.div`
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1;
+  .anticon svg {
+    color: #3f3f3f;
   }
 `;
 
@@ -31,6 +48,7 @@ const Explore = () => {
   const [searchHistory, setSearchHistory] = useState([]); // 로컬 스토리지에 저장된 목록
   const [searchClicked, setSearchClicked] = useState(false); // 검색버튼이 눌렸는지 확인
   const [activeTab, setActiveTab] = useState("all"); // 현재 활성화된 탭
+  const [likes, setLikes] = useState({}); // 레시피 ID별 좋아요 상태 저장
 
   useEffect(() => {
     // sessionStorage에 저장된 로그인 데이터
@@ -45,13 +63,64 @@ const Explore = () => {
       setSearchHistory(JSON.parse(storedSearchHistory));
     }
 
-    // 처음에 모든 레시피 가져오기
+    // 모든 레시피, 좋아요 상태 가져오기
     fetchRecipes("", false);
+    if (storedSigninData) {
+      fetchLikes();
+    }
   }, []);
+
+  // 사용자가 좋아요한 레시피 정보 가져오기
+  const fetchLikes = () => {
+    axios
+      .get(`${baseUrl}/user/likes`, {
+        //서버로 요청할 때 전달할 쿼리 파라미터
+        params: { session_id: signinData.session_id },
+      })
+      .then((response) => {
+        //response.data에 포함된 좋아요 리스트를 순회하며 새로운 객체 생성
+        const likesData = response.data.reduce((acc, like) => {
+          acc[like.recipe_id] = true;
+          return acc;
+        }, {});
+        setLikes(likesData); // 받아온 좋아요 데이터 저장
+      })
+      .catch((error) => {
+        console.error("좋아요 정보 가져오기 실패:", error);
+      });
+  };
 
   // 사진 클릭하면 /recipe/{id} 경로로 이동
   const handlePhotoClick = (id) => {
     navigate(`/recipe/${id}`);
+  };
+
+  // 좋아요 클릭 시 서버에 요청
+  const handleLikeClick = (id) => {
+    if (!signinData) {
+      alert("로그인 후 이용 가능합니다.");
+      return;
+    }
+
+    const likeData = {
+      session_id: signinData.session_id,
+      type: "recipe",
+      id: id,
+    };
+
+    axios
+      .post(`${baseUrl}/user/likes`, likeData)
+      .then((response) => {
+        console.log("좋아요 성공:", response);
+        //좋아요 상태 업데이트
+        setLikes((prevLikes) => ({
+          ...prevLikes, //이전 상태 복사
+          [id]: !prevLikes[id], //클릭한 레시피 ID를 키로 값 토글
+        }));
+      })
+      .catch((error) => {
+        console.error("좋아요 실패:", error);
+      });
   };
 
   // 검색입력 변경될 때 마다 업데이트
@@ -98,7 +167,6 @@ const Explore = () => {
           thumbnail_image: `${imgBaseUrl}${item.thumbnail_image}`,
         }));
         setData(updatedData); // 받아온 데이터 저장
-        // console.log(updatedData);
       })
       .catch((error) => {
         console.error("API 요청 에러:", error);
@@ -199,24 +267,25 @@ const Explore = () => {
         className="grid-container"
         columnClassName="column"
       >
-        {/* {data.map((item) => (
-          <div key={item.id} className="grid-item">
-            <img
-              src={item.thumbnail_image}
-              onClick={() => handlePhotoClick(item.id)}
-              alt={`${item.title}`}
-            />
-          </div>
-        ))} */}
         {data.map((item) => (
           <CustomCard
+            key={item.id}
             hoverable={true} // 마우스 오버 시 카드가 약간 확대되는 효과
             cover={
-              <img
-                src={item.thumbnail_image}
-                onClick={() => handlePhotoClick(item.id)}
-                alt={`${item.title}`}
-              />
+              <div>
+                <img
+                  src={item.thumbnail_image}
+                  onClick={() => handlePhotoClick(item.id)} // 특정 레시피 페이지로 이동
+                  alt={`${item.title}`}
+                  style={{ width: "100%", height: "auto" }}
+                />
+                <LikeIcon
+                  liked={likes[item.id]} // 현재 좋아요 상태 반영
+                  onClick={() => handleLikeClick(item.id)}
+                >
+                  {likes[item.id] ? <HeartFilled /> : <HeartOutlined />}
+                </LikeIcon>
+              </div>
             }
           >
             <Meta title={item.title} />
