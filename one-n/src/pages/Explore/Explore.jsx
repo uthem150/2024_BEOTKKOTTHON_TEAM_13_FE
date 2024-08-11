@@ -33,7 +33,7 @@ const LikeIcon = styled.div`
   cursor: pointer;
   z-index: 1;
   .anticon svg {
-    color: #3f3f3f;
+    color: #ffdc25;
   }
 `;
 
@@ -68,25 +68,33 @@ const Explore = () => {
     if (storedSigninData) {
       fetchLikes();
     }
+
+    // test용
+    fetchLikes();
   }, []);
 
   // 사용자가 좋아요한 레시피 정보 가져오기
   const fetchLikes = () => {
+    // API 요청을 위한 URL과 쿼리 파라미터 설정
+    // const apiUrl = `${baseUrl}/user/likes?session_id=${signinData.session_id}&type=recipe`;
+    const apiUrl = `${baseUrl}/user/likes?session_id=test_session_id&type=recipe`;
+
+    // Axios GET 요청
     axios
-      .get(`${baseUrl}/user/likes`, {
-        //서버로 요청할 때 전달할 쿼리 파라미터
-        params: { session_id: signinData.session_id },
-      })
+      .get(apiUrl)
       .then((response) => {
-        //response.data에 포함된 좋아요 리스트를 순회하며 새로운 객체 생성
+        // 응답 데이터에서 좋아요 정보를 객체 형태로 변환
         const likesData = response.data.reduce((acc, like) => {
-          acc[like.recipe_id] = true;
+          acc[like.id] = true; // 각 좋아요 항목의 ID를 키로 설정
           return acc;
         }, {});
+
+        console.log("Likes Data:", likesData);
+        // 상태 업데이트
         setLikes(likesData); // 받아온 좋아요 데이터 저장
       })
       .catch((error) => {
-        console.error("좋아요 정보 가져오기 실패:", error);
+        console.error("좋아요 정보 가져오기 실패:", error); // 오류 처리
       });
   };
 

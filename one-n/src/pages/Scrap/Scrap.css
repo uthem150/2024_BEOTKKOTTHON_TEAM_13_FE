@@ -154,7 +154,6 @@ div {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-top: 24px;
   margin-left: 16px;
 }
 
@@ -192,5 +191,5 @@ div {
 
 .scrap-scroll {
   margin-bottom: 80px;
-  width: 95%;
+  width: 100%;
 }
