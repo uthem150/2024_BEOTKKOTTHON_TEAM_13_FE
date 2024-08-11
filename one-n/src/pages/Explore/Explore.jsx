@@ -5,6 +5,20 @@ import "./Explore.css";
 import search from "../../assets/icons/search.svg";
 import Masonry from "https://cdn.skypack.dev/react-masonry-css@1.0.16";
 import SaleProduct from "../../components/SaleProduct/SaleProduct";
+import { Card } from "antd";
+import Meta from "antd/es/card/Meta";
+import styled from "styled-components";
+
+//Card 컴포넌트 확장하여 커스터마이징
+const CustomCard = styled(Card)`
+  margin-top: 5px;
+  .ant-card-body {
+    padding: 15px;
+  }
+  .ant-card-meta-title {
+    font-size: 0.7rem;
+  }
+`;
 
 const Explore = () => {
   const baseUrl = "https://n1.junyeong.dev/api";
@@ -185,7 +199,7 @@ const Explore = () => {
         className="grid-container"
         columnClassName="column"
       >
-        {data.map((item) => (
+        {/* {data.map((item) => (
           <div key={item.id} className="grid-item">
             <img
               src={item.thumbnail_image}
@@ -193,6 +207,20 @@ const Explore = () => {
               alt={`${item.title}`}
             />
           </div>
+        ))} */}
+        {data.map((item) => (
+          <CustomCard
+            hoverable={true} // 마우스 오버 시 카드가 약간 확대되는 효과
+            cover={
+              <img
+                src={item.thumbnail_image}
+                onClick={() => handlePhotoClick(item.id)}
+                alt={`${item.title}`}
+              />
+            }
+          >
+            <Meta title={item.title} />
+          </CustomCard>
         ))}
       </Masonry>
     </>

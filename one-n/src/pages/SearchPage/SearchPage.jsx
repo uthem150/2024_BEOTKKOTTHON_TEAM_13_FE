@@ -72,6 +72,11 @@ export default function SearchPage() {
 
   return (
     <div className="search-container">
+      <div className="search-back-button-container">
+        <button className="search-back-button" onClick={handleBackClick}>
+          <Back />
+        </button>
+      </div>
       <div className="input-container">
         <input
           className="product-search"
