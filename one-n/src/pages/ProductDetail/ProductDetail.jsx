@@ -10,10 +10,13 @@ import { ThrumnailRecipe } from "../../components/Recipe/ThrumnailRecipe";
 import { useNavigate } from "react-router-dom";
 import FiledPick from "../../assets/filedproductpick.png";
 import Mypick from "../../assets/productpick.png";
+import ImageGallery from "react-image-gallery";
 
 export default function ProductDetail() {
   const baseUrl = "https://n1.junyeong.dev/api";
   const imageUrl = "https://n1.junyeong.dev";
+
+  const [Images, setImages] = useState([]); //이미지 데이터 배열 저장
 
   const { productId } = useParams();
   const [productData, setProductData] = useState({});
@@ -68,6 +71,21 @@ export default function ProductDetail() {
       }
       const data = await response.json();
       console.log(data);
+
+      let images = [];
+
+      if (Array.isArray(data.image)) {
+        data.image.forEach((item) => {
+          if (item.image) {
+            images.push(`${imageUrl}/${item.image}`); // 배열일 때
+          }
+        });
+      } else if (typeof data.image === "string") {
+        images.push(`${imageUrl}/${data.image}`); // 문자열일 때
+      }
+      console.log("안녕", images);
+      setImages(images);
+
       return data;
     } catch (error) {
       console.error("Error fetching product data:", error);
@@ -98,6 +116,12 @@ export default function ProductDetail() {
     });
   };
 
+  // 이미지 배열을 ImageGallery의 형식에 맞게 변환
+  const imageItems = Images.map((image) => ({
+    original: image,
+    thumbnail: image,
+  }));
+
   return (
     <div className="product-detail-container">
       {Object.keys(productData).length > 0 && (
@@ -112,12 +136,17 @@ export default function ProductDetail() {
             </button>
           </div>
 
+          {/* 이미지 컨테이너 */}
           <div className="image-container">
-            <img
+            <ImageGallery
+              items={imageItems} //Images 배열을 ImageGallery에 전달
+              showThumbnails={false}
+            />
+            {/* <img
               src={`${imageUrl}/${productData.image}`}
               alt="Product"
               className="product-images"
-            />
+            /> */}
           </div>
 
           <div className="price-pick">
