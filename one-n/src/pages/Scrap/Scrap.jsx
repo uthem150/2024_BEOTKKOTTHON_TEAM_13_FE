@@ -6,6 +6,38 @@ import axios from "axios";
 import SaleProduct from "../../components/SaleProduct/SaleProduct";
 import Masonry from "https://cdn.skypack.dev/react-masonry-css@1.0.16";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { Card } from "antd";
+import { HeartOutlined, HeartFilled } from "@ant-design/icons";
+import Meta from "antd/es/card/Meta";
+
+//Card 컴포넌트 확장하여 커스터마이징
+const CustomCard = styled(Card)`
+  /* margin: 10px 4px; */
+  margin: 3px;
+  margin-top: 10px;
+  position: relative;
+  .ant-card-body {
+    padding: 15px;
+  }
+
+  .ant-card-meta-title {
+    font-size: 0.7rem;
+  }
+`;
+
+// 하트 아이콘 스타일링
+const LikeIcon = styled.div`
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1;
+  .anticon svg {
+    color: #ffdc25;
+  }
+`;
 
 export default function Scrap() {
   const baseUrl = "https://n1.junyeong.dev/api";
@@ -14,7 +46,7 @@ export default function Scrap() {
   const [signinData, setSigninData] = useState(null); // 유저 데이터
   const [satisfaction, setSatisfaction] = useState(null); // 만족도
   const [nickname, setNickname] = useState(null);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]); // 사용자가 작성한 게시글
   // console.log(products);
   const [data, setData] = useState([]); // 작성한 레시피 데이터
 
@@ -22,6 +54,7 @@ export default function Scrap() {
   const [selectedWishlistButton, setSelectedWishlistButton] = useState("글"); // 찜 탭 내부에서, 선택하는 항목
   const [pickProducts, setPickProducts] = useState([]); // 찜 탭 내부에서, 좋아요한 글
   const [likedRecipe, setLikedRecipe] = useState([]); // 찜 탭 내부에서, 좋아요 한 레시피
+  const [likes, setLikes] = useState({}); // 레시피 ID별 좋아요 상태 저장
 
   // 처음 탭 상태는 재료탭
   const [selectedOption, setSelectedOption] = useState("ingredients");
@@ -55,6 +88,39 @@ export default function Scrap() {
     }
   };
 
+  // 사진 클릭하면 /recipe/{id} 경로로 이동
+  const handlePhotoClick = (id) => {
+    navigate(`/recipe/${id}`);
+  };
+
+  // 좋아요 클릭 시 서버에 요청
+  const handleLikeClick = (id) => {
+    if (!signinData) {
+      alert("로그인 후 이용 가능합니다.");
+      return;
+    }
+
+    const likeData = {
+      session_id: signinData.session_id,
+      type: "recipe",
+      id: id,
+    };
+
+    axios
+      .post(`${baseUrl}/user/likes`, likeData)
+      .then((response) => {
+        console.log("좋아요 성공:", response);
+        //좋아요 상태 업데이트
+        setLikes((prevLikes) => ({
+          ...prevLikes, //이전 상태 복사
+          [id]: !prevLikes[id], //클릭한 레시피 ID를 키로 값 토글
+        }));
+      })
+      .catch((error) => {
+        console.error("좋아요 실패:", error);
+      });
+  };
+
   // 컴포넌트 마운트 될 때, 사용자 정보 가져옴
   useEffect(() => {
     //사용자 정보 가져옴
@@ -86,7 +152,6 @@ export default function Scrap() {
         console.error("Error fetching data:", error);
       }
     };
-
     fetchUserInfo();
     fetchData();
   }, []);
@@ -155,20 +220,17 @@ export default function Scrap() {
     // const apiUrl = `${baseUrl}/user/likes?session_id=${signinData}&type=recipe`;
     const apiUrl = `${baseUrl}/user/likes?session_id=test_session_id&type=recipe`;
 
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        const updatedData = response.data.map((item) => ({
-          ...item,
-          thumbnail_image: `${imgUrl}${item.thumbnail_image}`,
-        }));
-        console.log("요청감");
-        console.log(updatedData);
-        setLikedRecipe(updatedData);
-      })
-      .catch((error) => {
-        console.error("API 요청 에러:", error);
-      });
+    try {
+      const response = await axios.get(apiUrl);
+      const updatedData = response.data.map((item) => ({
+        ...item,
+        thumbnail_image: `${imgUrl}${item.thumbnail_image}`,
+      }));
+      setLikedRecipe(updatedData);
+      console.log(updatedData);
+    } catch (error) {
+      console.error("API 요청 에러:", error);
+    }
   };
 
   // 찜 탭 안에 들어갈 옵션
@@ -183,6 +245,9 @@ export default function Scrap() {
       fetchLikedRecipe();
     }
   }, [selectedWishlistButton]);
+
+  // 좋아요한 레시피 id를 Set으로 변환
+  const likedRecipeIds = new Set(likedRecipe.map((recipe) => recipe.id));
 
   return (
     <div className="scrap-container">
@@ -238,11 +303,21 @@ export default function Scrap() {
       </div>
       <div className="scrap-scroll-container">
         <div className="scrap-scroll">
-          {selectedOption === "ingredients" &&
-            products.map((item) => (
-              <SaleProduct key={item.id} product={item} />
-            ))}
-
+          {/* 작성한 재료 글 목록 */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "15px",
+              flexDirection: "column",
+            }}
+          >
+            {selectedOption === "ingredients" &&
+              products.map((item) => (
+                <SaleProduct key={item.id} product={item} />
+              ))}
+          </div>
+          {/* 작성한 레시피 목록 */}
           {selectedOption === "recipe" && (
             <Masonry
               breakpointCols={2}
@@ -250,13 +325,33 @@ export default function Scrap() {
               columnClassName="column"
             >
               {data.map((item) => (
-                <div key={item.id} className="grid-item">
-                  <img src={item.thumbnail_image} alt={`Image ${item.title}`} />
-                </div>
+                <CustomCard
+                  key={item.id}
+                  hoverable={true} // 마우스 오버 시 카드가 약간 확대되는 효과
+                  cover={
+                    <div>
+                      <img
+                        src={item.thumbnail_image}
+                        onClick={() => handlePhotoClick(item.id)} // 특정 레시피 페이지로 이동
+                        alt={`${item.title}`}
+                        style={{ width: "100%", height: "auto" }}
+                      />
+                      {/* <LikeIcon
+                        liked={likes[item.id]} // 현재 좋아요 상태 반영
+                        onClick={() => handleLikeClick(item.id)}
+                      >
+                        {likes[item.id] ? <HeartFilled /> : <HeartOutlined />}
+                      </LikeIcon> */}
+                    </div>
+                  }
+                >
+                  <Meta title={item.title} />
+                </CustomCard>
               ))}
             </Masonry>
           )}
 
+          {/* 찜한 목록 (재료, 레시피) */}
           {selectedOption === "wishlist" && (
             <div className="wishlist-buttons">
               <button
@@ -281,23 +376,64 @@ export default function Scrap() {
               </button>
             </div>
           )}
-          {selectedWishlistButton === "글" &&
+          {selectedOption === "wishlist" &&
+            selectedWishlistButton === "글" &&
             pickProducts.map((product, index) => (
-              <SaleProduct key={index} product={product} />
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  margin: "15px",
+                  flexDirection: "column",
+                }}
+              >
+                <SaleProduct key={index} product={product} />
+              </div>
             ))}
-          {selectedWishlistButton === "레시피" && (
-            <Masonry
-              breakpointCols={2}
-              className="grid-container"
-              columnClassName="column"
-            >
-              {likedRecipe.map((item) => (
-                <div key={item.id} className="grid-item">
-                  <img src={item.thumbnail_image} alt={`Image ${item.title}`} />
-                </div>
-              ))}
-            </Masonry>
-          )}
+
+          {selectedOption === "wishlist" &&
+            selectedWishlistButton === "레시피" && (
+              <Masonry
+                breakpointCols={2}
+                className="grid-container"
+                columnClassName="column"
+              >
+                {likedRecipe.map((item) => (
+                  <CustomCard
+                    key={item.id}
+                    hoverable={true} // 마우스 오버 시 카드가 약간 확대되는 효과
+                    cover={
+                      <div>
+                        <img
+                          src={item.thumbnail_image}
+                          onClick={() => handlePhotoClick(item.id)} // 특정 레시피 페이지로 이동
+                          alt={`${item.title}`}
+                          style={{ width: "100%", height: "auto" }}
+                        />
+                        <LikeIcon
+                          liked={likes[item.id]} // 현재 좋아요 상태 반영
+                          onClick={() => handleLikeClick(item.id)}
+                        >
+                          {likedRecipeIds.has(item.id) ? (
+                            <HeartFilled />
+                          ) : (
+                            <HeartOutlined />
+                          )}
+                        </LikeIcon>
+                      </div>
+                    }
+                  >
+                    <Meta title={item.title} />
+                  </CustomCard>
+                  // <div key={item.id} className="grid-item">
+                  //   <img
+                  //     src={item.thumbnail_image}
+                  //     alt={`Image ${item.title}`}
+                  //   />
+                  // </div>
+                ))}
+              </Masonry>
+            )}
         </div>
       </div>
     </div>

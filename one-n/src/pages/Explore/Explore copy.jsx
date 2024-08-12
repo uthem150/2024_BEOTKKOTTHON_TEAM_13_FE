@@ -210,6 +210,10 @@ const Explore = () => {
         </div>
       )}
 
+      {/* {data.map((item) => (
+        <SaleProduct key={item.id} product={item} />
+      ))} */}
+
       <Masonry
         breakpointCols={2}
         className="grid-container"
