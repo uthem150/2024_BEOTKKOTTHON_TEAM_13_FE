@@ -10,7 +10,7 @@ import SaleProduct from '../../components/SaleProduct/SaleProduct';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import { MyContext } from '../../components/MyContextProvider/MyContextProvider';
-import Signup from '../../components/Sign/Signup';
+import Signup from '../../components/Sign/SignupModal';
 
 
 

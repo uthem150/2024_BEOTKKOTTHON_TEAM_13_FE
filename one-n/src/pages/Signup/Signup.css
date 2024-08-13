@@ -1,0 +1,134 @@
+.signuppage-container {
+    margin-top: 30px;
+    padding: 16px;
+    overflow-y: auto;
+}
+
+.top-nav {
+    display: flex;
+    margin-bottom: 28px;
+}
+
+.signup-title {
+    color: #191919;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 14px 0 0 16px;
+}
+
+.info-layout {
+    width: 343px;
+    height: 78px;
+    margin-bottom: 40px;
+}
+
+.info-title {
+    margin-bottom: 12px;
+    color: #1A1A1A;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.info-input {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    border-bottom: 1px solid #CCC;
+}
+
+.info-input::placeholder {
+    color: #B2B2B2;
+}
+
+.info-input.has-text {
+    border-bottom: 1px solid #1A1A1A;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.send-code-button {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 4px 8px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    background: #BCBCBC;
+    border: none;
+    color: #F2F2F2;
+    font-size: 12px;
+    letter-spacing: -0.12px;
+    cursor: pointer;
+}
+
+.match_message{
+    display: flex;
+    align-items: center;
+    color:#30BE13;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.error_message{
+    display: flex;
+    align-items: center;
+    color:#F42828;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.service-box {
+    margin-bottom: 24px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #CCC;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.08); 
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start;
+}
+
+.service-box-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.service-box input[type='checkbox'] {
+    margin-right: 8px;
+    transform: scale(1.5); /* 사이즈 조정 */
+    -webkit-transform: scale(1.5); /* Safari 호환성 */
+    accent-color: #4D4D4D;
+}
+
+.service-box label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    font-weight: 500;
+    color: #4D4D4D;
+    cursor: pointer;
+}
+
+.service-all-comment{
+    margin: 0 0 12px 24px;
+    color: #808080;
+    font-size: 14px;
+}
+
+.signup-btn {
+    width: 100%;
+    color: #1A1A1A;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: none;
+    background-color: #FFDC25;
+    cursor: pointer;
+}

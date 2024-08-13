@@ -1,0 +1,109 @@
+.signinpage-container {
+  margin-top: 30px;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.back-button {
+  margin-top: 16px;
+  cursor: pointer;
+}
+
+.signin-info {
+  display: flex;
+  flex-direction: row;
+  gap: 23px;
+  margin: 48px 0 75px 0;
+}
+
+.signin-title {
+  color: #000;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 160%;
+}
+
+.signin-title2 {
+  position: relative;
+  color: #000;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 160%;
+  display: inline-block;
+}
+
+.signin-title2::after {
+  content: "";
+  position: absolute;
+  left: 9px;
+  right: 0;
+  bottom: -0.5px;
+  height: 65%;
+  width: 90%;
+  background-color: rgba(255, 220, 37, 0.35);
+  z-index: -1;
+}
+
+.signin-logo-img {
+  width: 64px;
+  height: 65px;
+}
+
+.input-field {
+  display: flex;
+  width: 90%;
+  margin-bottom: 8px;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #CCC;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.08);
+}
+
+.input-field::placeholder {
+  color: #B2B2B2; 
+}
+
+.signin-btn{
+  width: 100%;
+  color: #191919;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 8px 0;
+  padding: 16px;
+  border-radius: 8px;
+  border: none;
+  background-color: #FFDC25;
+  cursor: pointer;
+}
+
+.signup-search{
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  font-size: 12px;
+  color: #8C8C8C;
+  gap: 16px;
+  cursor: pointer;
+}
+
+.or-line{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #E6E6E6;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.border-line{
+  width: 35%;
+  border-bottom: 1px solid #F2F2F2;
+  justify-content: left;
+}
+.social-icon{
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+  gap: 16px;
+  cursor: pointer;
+}

@@ -63,6 +63,7 @@
 
 .input-top-img img {
     max-width: 100%;
+    cursor: pointer;
 }
 
 .plus-btn {
@@ -77,6 +78,7 @@
     color: #666;
     border: 1px solid #BCBCBC;
     background-color: #FFF;
+    cursor: pointer;
 }
 
 .upload-btn {
@@ -93,6 +95,7 @@
     color: #191919;
     border: none;
     background-color: #FFDC25;
+    cursor: pointer;
 }
 
 input:focus {
