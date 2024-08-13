@@ -5,7 +5,6 @@ export const PlusGrd = ({ index, ingredient, setIngredient }) => {
     const [name, setName] = useState(ingredient?.name || '');
     const [amount, setAmount] = useState(ingredient?.amount || '');
 
-    // Update ingredient whenever name or amount changes
     useEffect(() => {
         if (setIngredient) {
             setIngredient(index, { name, amount });
