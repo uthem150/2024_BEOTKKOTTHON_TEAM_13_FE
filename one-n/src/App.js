@@ -8,12 +8,6 @@ import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import ReProductDetail from "./pages/ReProductDetail/ReProductDetail";
 import SelectLocation from "./components/SelectLocation/SelectLocation";
 import ProductPost from "./pages/ProductPost/ProductPost";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  BrowserRouter,
-} from "react-router-dom";
 import SearchAddress from "./components/SearchAddress/SearchAddress";
 import Scrap from "./pages/Scrap/Scrap";
 import { MyContextProvider } from "./components/MyContextProvider/MyContextProvider";
@@ -26,6 +20,7 @@ import RecipeReg from "./pages/RecipeReg/RecipeReg";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import Signin from "./pages/Signin/Signin";
 import Signup from "./pages/Signup/Signup";
+import EditProfile from "./pages/EditProfile/EditProfile"; // 추가된 import
 
 function App() {
   return (
@@ -33,14 +28,8 @@ function App() {
       <MyContextProvider>
         <div className="App">
           <Routes>
-            <Route
-              path="/product-detail/:productId"
-              element={<ProductDetail />}
-            />
-            <Route
-              path="/reproduct-detail/:productId"
-              element={<ReProductDetail />}
-            />
+            <Route path="/product-detail/:productId" element={<ProductDetail />} />
+            <Route path="/reproduct-detail/:productId" element={<ReProductDetail />} />
             <Route path="/map" element={<Map />} />
             <Route path="/search-address" element={<SearchAddress />} />
             <Route path="/select-location" element={<SelectLocation />} />
@@ -49,19 +38,19 @@ function App() {
             <Route path="/" element={<Signin />} />
             <Route path="/home" element={<MainPage />} />
             <Route path="/chat" element={<ChatList />} />
-            <Route path='/explore' element={<Explore />} />
-            <Route path='/search' element={<SearchPage />} />
-            <Route path='/more-product' element={<MoreProductPage />} />
-            <Route path='/check-location' element={<CheckLocationPage />} />
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/more-product" element={<MoreProductPage />} />
+            <Route path="/check-location" element={<CheckLocationPage />} />
             <Route path="/edit-profile" element={<EditProfile />} />
             <Route path="/chatroom/:chatId" element={<ChatRoom />} />
             <Route path="/recipe/:recipeId" element={<RecipeDetail />} />
             <Route path="/recipeRegister" element={<RecipeReg />} />
             <Route path="/signup" element={<Signup />} />
           </Routes>
+          <ConditionalNavBar />
         </div>
       </MyContextProvider>
-      <ConditionalNavBar />
     </Router>
   );
 }
