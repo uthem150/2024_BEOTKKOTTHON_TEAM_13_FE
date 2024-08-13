@@ -65,7 +65,7 @@
     cursor: pointer;
 }
 
-.match_error{
+.match_message{
     display: flex;
     align-items: center;
     color:#30BE13;
