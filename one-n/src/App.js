@@ -56,7 +56,7 @@ function App() {
 
 function ConditionalNavBar() {
   const location = useLocation();
-  const noNavBarRoutes = ["/signin", "/signup"]; // Navbar를 표시하지 않을 경로
+  const noNavBarRoutes = ["/", "/signup"]; // Navbar를 표시하지 않을 경로
 
   return !noNavBarRoutes.includes(location.pathname) ? <NavBar /> : null;
 }
