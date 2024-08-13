@@ -6,9 +6,6 @@
 
 .top-nav {
     display: flex;
-}
-
-.back-button {
     margin-bottom: 28px;
 }
 
@@ -16,7 +13,7 @@
     color: #191919;
     font-size: 16px;
     font-weight: 600;
-    margin: 3px 0 0 16px;
+    margin: 14px 0 0 16px;
 }
 
 .info-layout {
@@ -66,6 +63,22 @@
     font-size: 12px;
     letter-spacing: -0.12px;
     cursor: pointer;
+}
+
+.match_error{
+    display: flex;
+    align-items: center;
+    color:#30BE13;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.error_message{
+    display: flex;
+    align-items: center;
+    color:#F42828;
+    font-size: 12px;
+    margin-top: 8px;
 }
 
 .service-box {

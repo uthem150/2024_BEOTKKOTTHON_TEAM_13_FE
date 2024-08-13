@@ -3,19 +3,37 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import './Signup.css';
 import { ReactComponent as Back } from '../../assets/back.svg';
+import { ReactComponent as RightCheck } from '../../assets/rightCheck.svg';
+import { ReactComponent as WrongCheck } from '../../assets/wrongCheck.svg';
 
 function Signup() {
 
     const baseUrl = "https://n1.junyeong.dev/api";
     const navigate = useNavigate();
 
-    // 상태 관리
     const [nickname, setNickname] = useState('');
+
     const [email, setEmail] = useState('');
+    const [isEmailValid, setIsEmailValid] = useState(true);
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const handleEmailChange = (e) => {
+        const newEmail = e.target.value;
+        setEmail(newEmail);
+        setIsEmailValid(emailRegex.test(newEmail));
+    };
+
+    // 전화번호
     const [phoneNum, setPhoneNum] = useState('');
     const [showConfirmPhoneNum, setShowConfirmPhoneNum] = useState(false);
+
+    // 비밀번호
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+
+    const isPasswordValid = password.length >= 10 && password.length <= 15;
+    const passwordsMatch = password && confirmPassword && password === confirmPassword;
 
     // 체크박스
     const [isAllChecked, setIsAllChecked] = useState(false);
@@ -37,9 +55,9 @@ function Signup() {
     // 개별 체크박스 상태 변경 핸들러
     const handleCheckboxChange = () => {
         setIsAllChecked(
-            isYouthChecked && 
-            isSmallPaymentChecked && 
-            isECommerceChecked && 
+            isYouthChecked &&
+            isSmallPaymentChecked &&
+            isECommerceChecked &&
             isMarketingChecked
         );
     };
@@ -59,15 +77,15 @@ function Signup() {
 
     const handleSignup = () => {
         // const apiUrlSignup = `${baseUrl}/user/signup`;
-    
+
         // axios.post(apiUrlSignup)
         //   .then((response) => {
-            navigate("/signin")
+        navigate("/signin")
         //   })
         //   .catch((error) => {
         //     console.error('API 요청 에러:', error);
         //   });
-      };
+    };
 
     return (
         <div className='signuppage-container'>
@@ -96,8 +114,16 @@ function Signup() {
                     className={`info-input ${email ? 'has-text' : ''}`}
                     placeholder="이메일을 입력해주세요."
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={handleEmailChange}
                 />
+                {!isEmailValid && email && (
+                <div className="error_message">
+                    <WrongCheck />
+                    <div style={{ margin: '0 8px' }}>
+                    유효한 이메일을 입력해주세요.
+                    </div>
+                </div>
+            )}
             </div>
 
             {/* 휴대폰 인증 */}
@@ -132,6 +158,23 @@ function Signup() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                {isPasswordValid && (
+                    <div className="match_message">
+                        <RightCheck />
+                        <div style={{ margin: '0 8px' }}>
+                            사용 가능한 비밀번호입니다
+                        </div>
+                    </div>
+                )}
+                {!isPasswordValid && password && (
+                    <div className="error_message">
+                        <WrongCheck />
+                        <div style={{ margin: '0 8px' }}>
+                            비밀번호로 사용하실 수 없습니다.
+                        </div>
+                    </div>
+                )}
+
             </div>
 
             {/* 비밀번호 확인 */}
@@ -143,6 +186,22 @@ function Signup() {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />
+                 {passwordsMatch && (
+                    <div className="match_message">
+                        <RightCheck />
+                        <div style={{ margin: '0 8px' }}>
+                            설정한 비밀번호와 일치합니다.
+                        </div>
+                    </div>
+                )}
+                {confirmPassword && !passwordsMatch && (
+                    <div className="error_message">
+                        <WrongCheck />
+                        <div style={{ margin: '0 8px' }}>
+                            설정한 비밀번호가 일치하지 않습니다.
+                        </div>
+                    </div>
+                )}
             </div>
 
             <div className="service-info">
