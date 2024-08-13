@@ -80,7 +80,7 @@ function Signup() {
 
         // axios.post(apiUrlSignup)
         //   .then((response) => {
-        navigate("/signin")
+        navigate("/")
         //   })
         //   .catch((error) => {
         //     console.error('API 요청 에러:', error);
