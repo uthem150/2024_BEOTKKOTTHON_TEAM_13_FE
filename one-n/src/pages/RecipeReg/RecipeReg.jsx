@@ -36,28 +36,40 @@ function RecipeReg() {
   // 재료 추가
   const [GrdCount, setGrdCount] = useState(0);
   const [ingredients, setIngredients] = useState([]);
-  const addIngredient = (ingredient) => {
-    setIngredients((prevIngredients) => [...prevIngredients, ingredient]);
+  // 재료 업데이트 함수
+  const addIngredient = (index, newIngredient) => {
+    setIngredients((prev) => {
+      const newIngredients = [...prev];
+      newIngredients[index] = newIngredient;
+      return newIngredients;
+    });
   };
+
 
   // 과정 추가
   const [StepCount, setStepCount] = useState(0);
   const [processes, setProcesses] = useState([]);
-  const addProcess = (process) => {
-    setProcesses((prevProcesses) => [...prevProcesses, process]);
+
+  const addProcess = (index, newProcess) => {
+    setProcesses((prev) => {
+      const newProcesses = [...prev];
+      newProcesses[index] = newProcess;
+      return newProcesses;
+    });
   };
 
   // 레시피 등록 함수
   const registerRecipe = () => {
     const recipeData = {
       userId: signinData.userId, // 사용자 ID
-      thumbnailImage: URL.createObjectURL(image),
+      thumbnailImage: image ? URL.createObjectURL(image) : "",
       title: document.querySelector('.input-title').value.trim(),
-      ingredients: ingredients, // 재료 목록
-      processes: processes, // 과정 목록
+      ingredients: ingredients.filter(item => item.name && item.amount), // 재료 목록
+      processes: processes.filter(item => item.step || item.image), // 과정 목록
     };
 
-    // 실제로 API에 POST 요청 보내는 부분
+    console.log('레시피 데이터:', recipeData);
+
     fetch(`${baseUrl}/recipe`, {
       method: 'POST',
       headers: {
@@ -168,8 +180,11 @@ function RecipeReg() {
         </div>
 
         {/* 재료 추가 컴포넌트 */}
-        {[...Array(GrdCount+3)].map((_, index) => (
-          <PlusGrd key={index} addIngredient={addIngredient} />
+        {[...Array(GrdCount + 3)].map((_, index) => (
+          <PlusGrd key={index}
+            index={index}
+            ingredient={ingredients[index] || {}}
+            setIngredient={addIngredient} />
         ))}
 
         <button className="plus-btn" onClick={() => setGrdCount(prevCount => prevCount + 1)}>
@@ -184,7 +199,12 @@ function RecipeReg() {
 
         {/* 과정 추가 컴포넌트 */}
         {[...Array(StepCount + 1)].map((_, index) => (
-          <PlusStep key={index} index={index} addProcess={addProcess} />
+          <PlusStep
+            key={index}
+            index={index}
+            process={processes[index] || {}}
+            setProcess={addProcess}
+          />
         ))}
 
         <button className="plus-btn" onClick={() => setStepCount(prevCount => prevCount + 1)}>
