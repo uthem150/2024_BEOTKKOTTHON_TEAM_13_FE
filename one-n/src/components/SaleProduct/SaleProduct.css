@@ -8,6 +8,10 @@
   cursor: pointer;
 }
 
+.sale-product:hover {
+  cursor: pointer; /* 마우스 커서 변경 */
+}
+
 .product-details {
   display: flex;
 }
@@ -16,13 +20,12 @@
   width: 114px;
   height: 114px;
   margin-right: 20px;
+  border-radius: 5px;
 }
 
 .product-details h2 {
   margin: 0;
 }
-
-
 
 .product-item {
   margin-top: 12px;
@@ -128,7 +131,6 @@
   letter-spacing: -0.12px;
 }
 
-
 .sale-product-text-pick {
     display: flex;
     justify-content: space-between;
@@ -142,50 +144,46 @@
     cursor: pointer;
 }
 
-
-
 .date-people {
-    display: flex;
-    margin-bottom: 8px;
+  display: flex;
+  margin-bottom: 8px;
 }
 
 .due-date {
-    display: flex;
-    padding: 4px 8px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    align-self: stretch;
-    border-radius: 4px;
-    background: var(--brand_color, #FFDC25);
-    color: #CD8C0B;
+  display: flex;
+  padding: 4px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 4px;
+  background: var(--brand_color, #ffdc25);
+  color: #cd8c0b;
 
-    /* b12_r */
-    font-family: Pretendard;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-
+  /* b12_r */
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .cur-people {
-    margin-left: 8px;
-    display: flex;
-    padding: 4px 8px;
-    align-items: center;
-    gap: 8px;
-    border-radius: 4px;
-    background: var(--grey-90, #E6E6E6);
-    color: var(--black-20, #333);
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    letter-spacing: -0.14px;
-
+  margin-left: 8px;
+  display: flex;
+  padding: 4px 8px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 4px;
+  background: var(--grey-90, #e6e6e6);
+  color: var(--black-20, #333);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.14px;
 }
 
 .sale-product-pick-button {
@@ -197,4 +195,3 @@
   margin-top: 2px;
   margin-right: 16px;
 }
-

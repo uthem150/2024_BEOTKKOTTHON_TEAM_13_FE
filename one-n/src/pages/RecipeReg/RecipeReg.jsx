@@ -18,12 +18,12 @@ function RecipeReg() {
 
   const [signinData, setSigninData] = useState(null);
 
-  useEffect(() => {
-    const storedSigninData = sessionStorage.getItem("signinData");
-    if (storedSigninData) {
-      setSigninData(JSON.parse(storedSigninData));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedSigninData = sessionStorage.getItem("signinData");
+  //   if (storedSigninData) {
+  //     setSigninData(JSON.parse(storedSigninData));
+  //   }
+  // }, []);
 
   console.log(signinData);
   // 사진 업로드
