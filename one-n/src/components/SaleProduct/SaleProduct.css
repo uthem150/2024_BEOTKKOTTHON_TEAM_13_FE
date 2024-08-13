@@ -5,6 +5,7 @@
   padding: 12px 0;
   position: relative;
   border-bottom: 0.5px solid lightgray;
+  cursor: pointer;
 }
 
 .product-details {
@@ -133,12 +134,12 @@
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
-
 }
 
 .sale-product-pick-button{
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
 
 

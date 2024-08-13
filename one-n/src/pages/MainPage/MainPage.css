@@ -250,6 +250,7 @@
   padding: 12px;
   border-radius: 100px;
   background: #ffd31a;
+  cursor: pointer;
 }
 
 .dropup {
