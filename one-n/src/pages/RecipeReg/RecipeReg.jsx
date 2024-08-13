@@ -25,6 +25,7 @@ function RecipeReg() {
     }
   }, []);
 
+  console.log(signinData);
   // 사진 업로드
   const [image, setImage] = useState(null);
 
@@ -65,7 +66,7 @@ function RecipeReg() {
       thumbnailImage: image ? URL.createObjectURL(image) : "",
       title: document.querySelector('.input-title').value.trim(),
       ingredients: ingredients.filter(item => item.name && item.amount), // 재료 목록
-      processes: processes.filter(item => item.step || item.image), // 과정 목록
+      processes: processes.filter(item => item.contents || item.image), // 과정 목록
     };
 
     console.log('레시피 데이터:', recipeData);

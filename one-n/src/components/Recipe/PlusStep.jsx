@@ -3,16 +3,16 @@ import camera from '../../assets/icons/camera.png';
 
 export const PlusStep = ({ index, process, setProcess }) => {
     const [image, setImage] = useState(process?.image || null);
-    const [step, setStep] = useState(process?.step || '');
+    const [contents, setContents] = useState(process?.contents || '');
 
     useEffect(() => {
         if (setProcess) {
             setProcess(index, {
                 image: image,
-                step: step
+                contents: contents
             });
         }
-    }, [image, step, index, setProcess]);
+    }, [image, contents, index, setProcess]);
 
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
@@ -20,7 +20,7 @@ export const PlusStep = ({ index, process, setProcess }) => {
     };
 
     const handleStepChange = (e) => {
-        setStep(e.target.value);
+        setContents(e.target.value);
     };
 
     return (
@@ -45,7 +45,7 @@ export const PlusStep = ({ index, process, setProcess }) => {
             <span className="stepNum">{index + 1}</span>
             <input
                 placeholder="내용을 입력해주세요"
-                value={step}
+                value={contents}
                 onChange={handleStepChange}
             />
         </div>
