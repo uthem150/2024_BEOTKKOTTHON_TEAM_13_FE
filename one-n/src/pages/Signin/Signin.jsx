@@ -21,11 +21,30 @@ function Signin() {
     };
 
     // userId
+    const handleSignin = async () => {
+        if (user_id) {
+            try {
+                const response = await axios.post(`${baseUrl}/user/signin`, {
+                    user_id
+                });
+                console.log('로그인 요청 성공:', response.data);
+                sessionStorage.setItem('signinData', JSON.stringify(response.data));
+                navigate("/home"); // 홈으로 이동
+            } catch (error) {
+                console.error('로그인 오류:', error.response ? error.response.data : error.message);
+            }
+        } else {
+            console.log('이메일과 비밀번호를 입력해주세요.');
+        }
+    };
+
+    // 이메일 & 비밀번호
     // const handleSignin = async () => {
-    //     if (user_id) {
+    //     if (email && password) {
     //         try {
     //             const response = await axios.post(`${baseUrl}/user/signin`, {
-    //                 user_id
+    //                 email,
+    //                 password
     //             });
     //             console.log('로그인 요청 성공:', response.data);
     //             navigate("/home"); // 홈으로 이동
@@ -36,24 +55,6 @@ function Signin() {
     //         console.log('이메일과 비밀번호를 입력해주세요.');
     //     }
     // };
-
-    // 이메일 & 비밀번호
-    const handleSignin = async () => {
-        if (email && password) {
-            try {
-                const response = await axios.post(`${baseUrl}/user/signin`, {
-                    email,
-                    password
-                });
-                console.log('로그인 요청 성공:', response.data);
-                navigate("/home"); // 홈으로 이동
-            } catch (error) {
-                console.error('로그인 오류:', error.response ? error.response.data : error.message);
-            }
-        } else {
-            console.log('이메일과 비밀번호를 입력해주세요.');
-        }
-    };
 
     const toSignup = () => {
         navigate("/signup");
@@ -74,14 +75,14 @@ function Signin() {
             </div>
 
             <div className="signin-input">
-                {/* <input
+                <input
                     type="text"
                     className="input-field"
                     placeholder="이메일을 입력해주세요."
                     value={user_id}
                     onChange={(e) => setUserId(e.target.value)}
-                /> */}
-                <input
+                />
+                {/* <input
                     type="text"
                     className="input-field"
                     placeholder="이메일을 입력해주세요."
@@ -94,7 +95,7 @@ function Signin() {
                     placeholder="비밀번호를 입력해주세요."
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                />
+                /> */}
             </div>
 
             <button className="signin-btn" onClick={handleSignin}>이메일로 로그인</button>
