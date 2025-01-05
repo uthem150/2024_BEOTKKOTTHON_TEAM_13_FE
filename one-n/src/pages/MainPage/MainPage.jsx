@@ -85,47 +85,47 @@ function MainPage() {
     }
   };
 
-  useEffect(() => {
-    // 위치 정보 가져오기
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
+  // useEffect(() => {
+  //   // 위치 정보 가져오기
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         const { latitude, longitude } = position.coords;
 
-          setUserLocation({ latitude, longitude });
-          console.log("User's current location:", { latitude, longitude });
+  //         setUserLocation({ latitude, longitude });
+  //         console.log("User's current location:", { latitude, longitude });
 
-          // Kakao API로 지역 코드 요청 보내기
-          const url = `https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x=${longitude}&y=${latitude}`;
-          axios.get(url, {
-            headers: {
-              'Authorization': `KakaoAK 6de009b450e245b534db1c733cb4f4ac`
-            }
-          })
-            .then(response => {
-              console.log('Region codes:', response.data);
-              const bCode = response.data.documents.find(doc => doc.region_type === 'B').code;
-              const shortBCode = bCode.substring(0, 5); // 앞에서 5자리만 추출
-              console.log('앞 5자리 B 타입의 코드:', shortBCode);
-              setBcode(shortBCode);
-              setMyBcode(shortBCode);
-              sessionStorage.setItem('myBcode', shortBCode);
+  //         // Kakao API로 지역 코드 요청 보내기
+  //         const url = `https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x=${longitude}&y=${latitude}`;
+  //         axios.get(url, {
+  //           headers: {
+  //             'Authorization': `KakaoAK 6de009b450e245b534db1c733cb4f4ac`
+  //           }
+  //         })
+  //           .then(response => {
+  //             console.log('Region codes:', response.data);
+  //             const bCode = response.data.documents.find(doc => doc.region_type === 'B').code;
+  //             const shortBCode = bCode.substring(0, 5); // 앞에서 5자리만 추출
+  //             console.log('앞 5자리 B 타입의 코드:', shortBCode);
+  //             setBcode(shortBCode);
+  //             setMyBcode(shortBCode);
+  //             sessionStorage.setItem('myBcode', shortBCode);
 
-              // 여기서 fetch 함수를 호출하여 요청 보내도록 수정
-              fetchProducts(shortBCode);
-            })
-            .catch(error => {
-              console.error('Error fetching region codes:', error);
-            });
-        },
-        (error) => {
-          console.error('Error getting user location:', error);
-        }
-      );
-    } else {
-      console.error('Geolocation is not supported by this browser.');
-    }
-  }, [page]);
+  //             // 여기서 fetch 함수를 호출하여 요청 보내도록 수정
+  //             fetchProducts(shortBCode);
+  //           })
+  //           .catch(error => {
+  //             console.error('Error fetching region codes:', error);
+  //           });
+  //       },
+  //       (error) => {
+  //         console.error('Error getting user location:', error);
+  //       }
+  //     );
+  //   } else {
+  //     console.error('Geolocation is not supported by this browser.');
+  //   }
+  // }, [page]);
 
   // fetchProducts 함수 정의
   const fetchProducts = (bCode) => {
